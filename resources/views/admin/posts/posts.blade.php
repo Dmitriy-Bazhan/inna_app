@@ -2,8 +2,22 @@
 
 @section('content')
 
-    <H1>Posts</H1>
+    <H1>Posts(Публикации)</H1>
 
-    <button><a href="{{ url('admin/posts/create') }}">Создать новый пост</a></button>
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-3 offset-9">
+
+                <a href="{{ url('admin/posts/create') }}"><button class="btn btn-success">Создать новый пост</button></a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
 
 @endsection
