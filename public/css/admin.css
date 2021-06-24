@@ -1,0 +1,11 @@
+.admin-header {
+    z-index: 10000;
+    position: fixed;
+    background-color: #0a9a2c;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.main-container {
+    /*margin-top: 5%;*/
+}

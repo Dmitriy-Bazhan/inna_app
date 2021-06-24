@@ -1,0 +1,48 @@
+.homepage-box-image1, .homepage-box-image2, .homepage-box-image3 {
+    border: solid 5px saddlebrown;
+    width: 100%;
+}
+
+.homepage-text-after-images {
+    position: relative;
+    bottom: 100%;
+    font-weight: bold;
+    font-size: 16pt;
+    color: saddlebrown;
+}
+
+.homepage-text-before-images {
+    font-weight: bold;
+    font-size: 16pt;
+    color: saddlebrown;
+}
+
+.homepage-box-image1 {
+    position: relative;
+    top: 4%;
+    left: 2%;
+    transform: rotate(10deg);
+}
+
+.homepage-box-image2 {
+    position: relative;
+    right: 10%;
+    margin-top: 5%;
+    transform: rotate(-10deg);
+}
+
+.homepage-box-image3 {
+    position: relative;
+    bottom: 6%;
+    transform: rotate(-5deg);
+    z-index: 1;
+}
+
+.homepage-box-image4 {
+    width: 80%;
+    position: relative;
+    bottom: 55%;
+    left: 60%;
+    transform: rotate(-40deg);
+    border: solid 5px saddlebrown;
+}

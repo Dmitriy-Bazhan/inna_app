@@ -1,0 +1,11 @@
+.site-header {
+    /*background-color: saddlebrown;*/
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin-bottom: 5%;
+}
+.header-text {
+    color: saddlebrown;
+    font-weight: 700;
+    font-size: 10pt;
+}
