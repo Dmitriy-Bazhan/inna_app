@@ -37,7 +37,7 @@
 
             </div>
 
-            <div class="col-2">
+            <div class="col-1">
 
                 <a href="{{ url('admin/posts') }}">
                     <button class="btn btn-danger">Отмена</button>
@@ -51,7 +51,7 @@
 
     <br>
 
-{{--    {{ dd($errors) }}--}}
+    {{--    {{ dd($errors) }}--}}
 
     <div class="container-fluid">
 
@@ -63,8 +63,6 @@
             @if(isset($post))
 
                 {{ method_field('PUT') }}
-
-            @endif
 
             {{-- Alias --}}
             <div class="form-group">
@@ -105,6 +103,8 @@
 
             </div>
 
+            @endif
+
             <button class="change_lang" data-lang="ua">UA</button>
             <button class="change_lang" data-lang="ru">RU</button>
             <br>
@@ -128,11 +128,11 @@
                                     <label class="control-label">Заголовок {{ mb_strtoupper($lang) }}: </label>
                                 </div>
 
-                                @if($errors->has('title.'. $key))
+                                @if($errors->has('title.'. $lang))
 
-                                    @error('title.'. $key)
+                                    @error('title.'. $lang)
 
-                                    <input type="text" name="title[{{ $key }}]" value="{{ old('title.' . $key) }}"
+                                    <input type="text" name="title[{{ $lang }}]" value="{{ old('title.' . $lang) }}"
                                            class="form-control input_in_admin"
                                            style="border: solid 1px red">
 
@@ -140,13 +140,13 @@
 
                                 @elseif(isset($post->data[$key]->title))
 
-                                    <input type="text" name="title[{{ $key }}]" class="form-control input_in_admin"
+                                    <input type="text" name="title[{{ $lang }}]" class="form-control input_in_admin"
                                            value="{{ $post->data[$key]->title }}">
 
                                 @else
 
-                                    <input type="text" name="title[{{ $key }}]" class="form-control input_in_admin"
-                                           value="{{ old('title.' . $key) }}">
+                                    <input type="text" name="title[{{ $lang }}]" class="form-control input_in_admin"
+                                           value="{{ old('title.' . $lang) }}">
 
                                 @endif
 
@@ -168,24 +168,24 @@
                                     <label class="control-label">Контент {{ mb_strtoupper($lang) }}: </label>
                                 </div>
 
-                                @if($errors->has('content.'. $key))
+                                @if($errors->has('content.'. $lang))
 
-                                    @error('content.'. $key)
+                                    @error('content.'. $lang)
 
-                                    <textarea name="content[{{$key}}]" rows="5" class="form-control input_in_admin"
-                                              style="border: solid 1px red">{{ old('content.'. $key) }}</textarea>
+                                    <textarea name="content[{{$lang}}]" rows="5" class="form-control input_in_admin"
+                                              style="border: solid 1px red">{{ old('content.'. $lang) }}</textarea>
 
                                     @enderror
 
                                 @elseif(isset($post->data[$key]->content))
 
                                     <textarea rows="5" class="form-control input_in_admin"
-                                              name="content[{{$key}}]">{{ $post->data[$key]->content }}</textarea>
+                                              name="content[{{$lang}}]">{{ $post->data[$key]->content }}</textarea>
 
                                 @else
 
                                     <textarea rows="5" class="form-control input_in_admin"
-                                              name="content[{{$key}}]">{{ old('content.'. $key) }}</textarea>
+                                              name="content[{{$lang}}]">{{ old('content.'. $lang) }}</textarea>
 
                                 @endif
 
@@ -215,9 +215,7 @@
                                      src="{{ asset('/images/ava/no-img.png') }}">
                             @endif
                             <div class="col-lg-12">
-                                <input type="hidden"
-                                       value="{{ !is_null($post->image_big) ? $post->image_big : '' }}"
-                                       name="old_image_big">
+
                                 <input type="file" class="form-control input_in_admin" name="imageBig">
                             </div>
                         </div>
@@ -235,9 +233,9 @@
                                      src="{{ asset('/images/ava/no-img.png') }}">
                             @endif
                             <div class="col-lg-12">
-                                <input type="hidden"
-                                       value="{{ isset($post->image_small) ? $post->image_small : '' }}"
-                                       name="old_image_small">
+                                {{--                                <input type="hidden"--}}
+                                {{--                                       value="{{ isset($post->image_small) ? $post->image_small : '' }}"--}}
+                                {{--                                       name="old_image_small">--}}
                                 <input type="file" class="form-control input_in_admin" name="imageSmall">
                             </div>
                         </div>
@@ -250,13 +248,13 @@
     </div>
 
     <script>
-        $('.change_lang[data-lang="ua"]').css('background', 'lightblue');
-        $('.change_lang[data-lang="ru"]').css('background', 'blue');
+        $('.change_lang[data-lang="ua"]').css('background', 'lightgreen');
+        $('.change_lang[data-lang="ru"]').css('background', 'lightgray');
         $('#ru').hide();
         $('#ua').show();
         $('.change_lang').click(function (event) {
-            $('.change_lang').css('background', 'blue');
-            $(this).css('background', 'lightblue');
+            $('.change_lang').css('background', 'lightgray');
+            $(this).css('background', 'lightgreen');
             event.preventDefault();
             var div = '#' + $(this).attr('data-lang');
             if (div == '#ru') {

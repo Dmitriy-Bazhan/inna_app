@@ -8,6 +8,9 @@
 
             <div class="col-8 offset-2">
 
+                <img class="admin_image_big"
+                     src="{{ asset('storage/image_big/1_2017709161217.jpg') }}">
+
                 <span class="homepage-text-before-images">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
                     libero quas reiciendis sequi tempora totam veniam voluptatem.
                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus

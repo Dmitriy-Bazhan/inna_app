@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\PostData;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
@@ -15,7 +17,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $data['posts'] = Post::with('data')->get();
+        $data['posts'] = Post::with('data')->paginate(5);
         $data['page'] = 'Posts';
         return view('admin.posts.posts', $data);
     }
@@ -39,14 +41,38 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->rules());
 
-        $validate = $request->validate($this->rules());
+        $post = Post::create([
+            'alias' => Str::slug($request->input('title.ua'), '-'),
+            ]);
+        $post_id = $post->id;
 
-        dd($validate);
+        foreach (['ua', 'ru'] as $key => $lang) {
+            $postData = new PostData;
+            $postData::create([
+                'post_id' => $post_id,
+                'lang' => $lang,
+                'title' => $request->input('title.' . $lang),
+                'content' => $request->input('content.' . $lang),
+            ]);
+        }
 
+        if ($request->hasFile('imageBig')) {
+            $file = $request->file('imageBig');
+            $fileName = 'post_' . $post_id . '_big_image';
+            $file->move('storage/image_big/', $fileName);
+            Post::where('id', $post_id)->update(['image_big' => $fileName]);
+        }
 
-        dd($request->input('alias'));
-        dd('Создать новый');
+        if ($request->hasFile('imageSmall')) {
+            $file = $request->file('imageSmall');
+            $fileName = 'post_' . $post_id . '_small_image';
+            $file->move('storage/image_small/', $fileName);
+            Post::where('id', $post_id)->update(['image_small' => $fileName]);
+        }
+
+        return redirect(url('admin/posts'));
     }
 
     /**
@@ -82,24 +108,34 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate($this->rules());
 
-        $validate = $request->validate($this->rules());
-        dd($validate);
+        $post = Post::find($id);
+        $post->alias = $request->input('alias');
+        $post->save();
 
-        dd($request->input('alias'));
-        dd('Изменить пост ' . $id);
+        foreach (['ua', 'ru'] as $key => $lang) {
+            $postData = PostData::where('post_id', $id)->where('lang', $lang)->first();
+            $postData->content = $request->input('content.' . $lang);
+            $postData->title = $request->input('title.' . $lang);
+            $postData->save();
+        }
 
-//        if ($request->hasFile('imageBig')) {
-//            $file = $request->file('imageBig');
-//            $file->move('storage/image_big/', $lesson_id . '_' . $file->getClientOriginalName());
-//            Lesson::where('id', $lesson_id)->update(['image_big' => $file->getClientOriginalName()]);
-//        }
-//
-//        if ($request->hasFile('imageSmall')) {
-//            $file = $request->file('imageSmall');
-//            $file->move('storage/image_small/', $lesson_id . '_' . $file->getClientOriginalName());
-//            Lesson::where('id', $lesson_id)->update(['image_small' => $file->getClientOriginalName()]);
-//        }
+        if ($request->hasFile('imageBig')) {
+            $file = $request->file('imageBig');
+            $fileName = 'post_' . $id . '_big_image';
+            $file->move('storage/image_big/', $fileName);
+            Post::where('id', $id)->update(['image_big' => $fileName]);
+        }
+
+        if ($request->hasFile('imageSmall')) {
+            $file = $request->file('imageSmall');
+            $fileName = 'post_' . $id . '_small_image';
+            $file->move('storage/image_small/', $fileName);
+            Post::where('id', $id)->update(['image_small' => $fileName]);
+        }
+
+        return redirect(url('admin/posts'));
     }
 
     /**
@@ -116,11 +152,11 @@ class PostsController extends Controller
     private function rules()
     {
         return [
-            'alias' => 'required|alpha_dash|max:255',
-            'title.*' => ['required', 'regex:/^[0-9A-Za-zА-Яа-яґҐЁёІіЇїЄє\'’ʼ\ ]+$/u'],
-            'content.*' => ['required', 'regex:/^[A-Za-zА-Яа-я0-9\ ]+$/u'],
-            'imageBig' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            'imageSmall' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'alias' => 'alpha_dash|max:255',
+            'title.*' => ['required', 'regex:/^[0-9A-Za-zА-Яа-яґҐЁёІіЇїЄє\'’ʼ.,:;-_\s\ ]+$/u'],
+            'content.*' => ['required', 'regex:/^[0-9A-Za-zА-Яа-яґҐЁёІіЇїЄє\'’ʼ.,:;-_\s\ ]+$/u'],
+            'imageBig' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'imageSmall' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ];
     }
 }
