@@ -18,10 +18,17 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('/') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Application') }}
+                    <x-jet-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                        {{ __('Profile') }}
                     </x-jet-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('/') }}">
+                        {{ __('Back to App') }}
+                    </x-jet-nav-link>
+                </div>
+
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -113,9 +120,9 @@
                                 {{ __('Manage Account') }}
                             </div>
 
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
-                            </x-jet-dropdown-link>
+{{--                            <x-jet-dropdown-link href="{{ route('profile.show') }}">--}}
+{{--                                {{ __('Profile') }}--}}
+{{--                            </x-jet-dropdown-link>--}}
 
                             @if(\Illuminate\Support\Facades\Auth::user()->role == 2)
                                 <x-jet-dropdown-link href="{{ route('admin.users') }}">

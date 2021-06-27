@@ -6,12 +6,28 @@
 
         <div class="col-2">
 
-            <span class="header-text">DDD</span>
+            <img src=" {{ asset('images/01.jpg') }}" style="height: 25px; width: 25px;">
+
+            <span class="header-text">НАШ БЛОГ</span>
 
         </div>
 
-        <div class="col-6">
+        <div class="col-2">
 
+            <span class="header-text">Публикации</span>
+
+        </div>
+
+        <div class="col-2">
+
+            <span class="header-text">Магазин</span>
+
+        </div>
+
+
+        <div class="col-2">
+
+            <span class="header-text">Контакты</span>
 
         </div>
 
@@ -23,7 +39,7 @@
 
             <div class="col-2">
 
-                <a href=" {{ route('dashboard') }}"><span class="header-text">{{ Auth::user()->name }}</span></a>
+                <a href=" {{ route('dashboard') }}"><span class="header-text">Вы зашли {{ Auth::user()->name }}</span></a>
 
             </div>
 

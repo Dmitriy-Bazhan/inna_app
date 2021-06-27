@@ -9,3 +9,27 @@
 .main-container {
     /*margin-top: 5%;*/
 }
+
+.input_in_admin {
+    font-size: 14pt;
+    background: transparent;
+    color: black;
+    /*border:none;*/
+    border-top: white;
+    border-left: white;
+    border-right: white;
+    resize: vertical;
+}
+
+.control-label {
+    font-size: 14pt;
+    color: darkgreen;
+    font-weight: 600;
+    text-align: right;
+    float: left;
+    margin-right: 15px;
+}
+
+.admin_image_big {
+    width: 20%;
+}
