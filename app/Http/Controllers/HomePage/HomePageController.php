@@ -10,7 +10,6 @@ class HomePageController extends Controller
 {
     public function index(){
         $data['page'] = 'home-page';
-
         return view('site.pages.homepage', $data);
     }
 }

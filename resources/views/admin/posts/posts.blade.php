@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <H1>Posts(Публикации)</H1>
+    <H1>Статьи</H1>
 
     <div class="container-fluid">
 
@@ -47,25 +47,27 @@
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->alias }}</td>
                                 <td>{{ $post->data[0]->title }}</td>
-                                <td>{{ $post->data[0]->content }}</td>
+                                <td>{{ mb_substr($post->data[0]->content, 0, 200) . '...' }}</td>
                                 @if(!is_null($post->image_big))
 
-                                    <td><img class="" style="width: 25px; height: 25px;"
-                                             src="{{ asset('storage/image_big/' . $post->image_big) }}"></td>
+                                    <td><img class="" style="width: 75px; height: 75px;"
+                                             src="{{ asset('storage/image_big/' . $post->image_big . '?' . rand(0,100)) }}"></td>
 
                                 @else
 
-                                    <td>Нет фото</td>
+                                    <td><img class="" style="width: 75px; height: 75px;"
+                                             src="{{ asset('/images/ava/no-img.png') }}"></td>
 
                                 @endif
                                 @if(!is_null($post->image_small))
 
-                                    <td><img class="" style="width: 25px; height: 25px;"
-                                             src="{{ asset('storage/image_small/' . $post->image_small) }}"></td>
+                                    <td><img class="" style="width: 75px; height: 75px;"
+                                             src="{{ asset('storage/image_small/' . $post->image_small . '?' . rand(0,100)) }}"></td>
 
                                 @else
 
-                                    <td>Нет фото</td>
+                                    <td><img class="" style="width: 75px; height: 75px;"
+                                             src="{{ asset('/images/ava/no-img.png') }}"></td>
 
                                 @endif
 

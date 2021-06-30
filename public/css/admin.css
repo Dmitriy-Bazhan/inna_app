@@ -38,6 +38,8 @@
     margin-right: 15px;
 }
 
-.admin_image_big {
-    width: 20%;
+.admin_image_big, .admin_image_small, .thumb{
+    width: 60%;
 }
+
+

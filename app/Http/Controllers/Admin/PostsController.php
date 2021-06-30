@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PostData;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostsController extends Controller
@@ -45,7 +46,7 @@ class PostsController extends Controller
 
         $post = Post::create([
             'alias' => Str::slug($request->input('title.ua'), '-'),
-            ]);
+        ]);
         $post_id = $post->id;
 
         foreach (['ua', 'ru'] as $key => $lang) {
@@ -61,14 +62,14 @@ class PostsController extends Controller
         if ($request->hasFile('imageBig')) {
             $file = $request->file('imageBig');
             $fileName = 'post_' . $post_id . '_big_image';
-            $file->move('storage/image_big/', $fileName);
+            Storage::disk('public')->putFileAs('image_big', $file, $fileName);
             Post::where('id', $post_id)->update(['image_big' => $fileName]);
         }
 
         if ($request->hasFile('imageSmall')) {
             $file = $request->file('imageSmall');
             $fileName = 'post_' . $post_id . '_small_image';
-            $file->move('storage/image_small/', $fileName);
+            Storage::disk('public')->putFileAs('image_small', $file, $fileName);
             Post::where('id', $post_id)->update(['image_small' => $fileName]);
         }
 
@@ -111,7 +112,7 @@ class PostsController extends Controller
         $request->validate($this->rules());
 
         $post = Post::find($id);
-        $post->alias = $request->input('alias');
+        $post->alias = Str::slug($request->input('title.ua'), '-');
         $post->save();
 
         foreach (['ua', 'ru'] as $key => $lang) {
@@ -124,14 +125,14 @@ class PostsController extends Controller
         if ($request->hasFile('imageBig')) {
             $file = $request->file('imageBig');
             $fileName = 'post_' . $id . '_big_image';
-            $file->move('storage/image_big/', $fileName);
+            Storage::disk('public')->putFileAs('image_big', $file, $fileName);
             Post::where('id', $id)->update(['image_big' => $fileName]);
         }
 
         if ($request->hasFile('imageSmall')) {
             $file = $request->file('imageSmall');
             $fileName = 'post_' . $id . '_small_image';
-            $file->move('storage/image_small/', $fileName);
+            Storage::disk('public')->putFileAs('image_small', $file, $fileName);
             Post::where('id', $id)->update(['image_small' => $fileName]);
         }
 
@@ -158,5 +159,11 @@ class PostsController extends Controller
             'imageBig' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'imageSmall' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ];
+    }
+
+    private function getFileExt($fileName)
+    {
+        $ext = substr($fileName, strripos($fileName, '.') + 1, strlen($fileName) - strripos($fileName, '.') + 1);
+        return $ext;
     }
 }

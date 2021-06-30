@@ -64,45 +64,6 @@
 
                 {{ method_field('PUT') }}
 
-            {{-- Alias --}}
-            <div class="form-group">
-
-                <div class="row">
-
-                    <div class="col-12">
-
-                        <div class="col-1">
-                            <label class="control-label">Алиас:</label>
-                        </div>
-
-                        @if($errors->has('alias'))
-
-                            @error('alias')
-
-                            <input type="text" name="alias" value="{{ old('alias') }}"
-                                   class="form-control input_in_admin"
-                                   style="border: solid 1px red">
-
-                            @enderror
-
-                        @elseif(isset($post->alias))
-
-                            <input type="text" name="alias" class="form-control input_in_admin"
-                                   value="{{ $post->alias }}">
-
-                        @else
-
-                            <input type="text" name="alias" class="form-control input_in_admin"
-                                   value="{{ old('alias') }}">
-
-                        @endif
-
-                    </div>
-
-                </div>
-
-            </div>
-
             @endif
 
             <button class="change_lang" data-lang="ua">UA</button>
@@ -172,19 +133,19 @@
 
                                     @error('content.'. $lang)
 
-                                    <textarea name="content[{{$lang}}]" rows="5" class="form-control input_in_admin"
+                                    <textarea name="content[{{$lang}}]" rows="7" class="form-control input_in_admin"
                                               style="border: solid 1px red">{{ old('content.'. $lang) }}</textarea>
 
                                     @enderror
 
                                 @elseif(isset($post->data[$key]->content))
 
-                                    <textarea rows="5" class="form-control input_in_admin"
+                                    <textarea rows="7" class="form-control input_in_admin"
                                               name="content[{{$lang}}]">{{ $post->data[$key]->content }}</textarea>
 
                                 @else
 
-                                    <textarea rows="5" class="form-control input_in_admin"
+                                    <textarea rows="7" class="form-control input_in_admin"
                                               name="content[{{$lang}}]">{{ old('content.'. $lang) }}</textarea>
 
                                 @endif
@@ -202,11 +163,29 @@
 
             {{-- Images --}}
             <div class="row">
-                <div class="col-lg-6">
-                    <label class="col-lg-5 control-label">Большая картинка</label>
 
-                    <div style="border:solid 2px white;">
-                        <div class="form-group">
+                <div class="col-6">
+
+                    <span class="control-label">Большая картинка</span>
+
+                </div>
+
+                <div class="col-6">
+
+                    <span class="control-label">Маленькая картинка</span><br>
+
+                </div>
+
+            </div>
+            <br>
+
+            <div class="row">
+
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+
+                        <div class="col-6 offset-3" id="list_big_image">
                             @if(isset($post->image_big) && file_exists('storage/image_big/' . $post->image_big))
                                 <img class="admin_image_big"
                                      src="{{ asset('storage/image_big/' . $post->image_big) }}">
@@ -214,33 +193,48 @@
                                 <img class="admin_image_big"
                                      src="{{ asset('/images/ava/no-img.png') }}">
                             @endif
-                            <div class="col-lg-12">
-
-                                <input type="file" class="form-control input_in_admin" name="imageBig">
-                            </div>
                         </div>
+
+                        <br>
+
+                        <div class="col-8 offset-2">
+                            <label class="custom-file-label" for="customFile">Выберите фаил</label>
+                            <input type="file" id="input-big-image"
+                                   class="form-control input_in_admin custom-file-input"
+                                   name="imageBig">
+                        </div>
+
                     </div>
+
                 </div>
-                <div class="col-lg-6">
-                    <div style="border:solid 2px white;">
-                        <label class="col-lg-5 control-label">Маленькая картинка</label>
-                        <div class="form-group">
+
+                <div class="col-6">
+
+                    <div class="form-group">
+
+                        <div class="col-6 offset-3" id="list_small_image">
                             @if(isset($post->image_small) && file_exists('storage/image_small/' . $post->image_small))
-                                <img class="admin_image_big"
+                                <img class="admin_image_small"
                                      src="{{ asset('storage/image_small/' . $post->image_small) }}">
                             @else
-                                <img class="admin_image_big"
+                                <img class="admin_image_small"
                                      src="{{ asset('/images/ava/no-img.png') }}">
                             @endif
-                            <div class="col-lg-12">
-                                {{--                                <input type="hidden"--}}
-                                {{--                                       value="{{ isset($post->image_small) ? $post->image_small : '' }}"--}}
-                                {{--                                       name="old_image_small">--}}
-                                <input type="file" class="form-control input_in_admin" name="imageSmall">
-                            </div>
                         </div>
+
+                        <br>
+
+                        <div class="col-8 offset-2">
+                            <label class="custom-file-label" for="customFile">Выберите фаил</label>
+                            <input type="file" id="input-small-image"
+                                   class="form-control input_in_admin custom-file-input"
+                                   name="imageSmall">
+                        </div>
+
                     </div>
+
                 </div>
+
             </div>
 
         </form>
@@ -265,6 +259,41 @@
             $(div).show();
             $(div1).hide();
         });
+
+        document.querySelector("#input-small-image").addEventListener("change", handleFileSelect, false);
+        document.querySelector("#input-big-image").addEventListener("change", handleFileSelect, false);
+
+        //Предпросмотр изображения
+        function handleFileSelect(evt) {
+            let files = evt.target.files; // Объект списка файлов
+            let list = $(this).parent().parent().children('div').attr('id');
+            let removeClass = $(this).parent().parent().children().children('img').attr('class');
+            // Прокрутите список файлов и визуализируйте файлы изображений в виде эскизов.
+            for (let i = 0, f; f = files[i]; i++) {
+
+                //  обрабатывать только файлы изображений.
+                if (!f.type.match('image.*')) {
+                    continue;
+                }
+
+                var reader = new FileReader();
+
+                // Закрытие для сбора информации о файле.
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        // Визуализировать миниатюру.
+                        $('.' + removeClass).remove();
+                        let span = document.createElement('span');
+                        span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                            '" title="', theFile.name, '"/>'].join('');
+                        document.getElementById(list).append(span);
+                    };
+                })(f);
+
+                // Прочитать файл изображения как URL-адрес данных.
+                reader.readAsDataURL(f);
+            }
+        }
     </script>
 
 @endsection
