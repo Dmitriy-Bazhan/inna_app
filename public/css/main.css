@@ -5,18 +5,18 @@
 }
 
 body {
-    background: white;
+    background: #eaeaea;
 }
 
 /*FOOTER*/
 .site-footer {
-    background-color: #a9adb0;
+    background-color: #212121;
     padding-top: 1%;
     padding-bottom: 1%;
     margin-top: 2%;
 }
 .footer-text-left {
-    color:black;
+    color:#8489a5;
     font-weight: bold;
     font-size: 16pt;
 }

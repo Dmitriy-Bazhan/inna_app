@@ -23,11 +23,15 @@
 
 {{--@include('site.components.header2')--}}
 
-<br>
-
 <div class="container-fluid">
 
-    <div class="row">
+    <div class="row" style="margin-top: 6%;">
+
+        <div class="col-9">
+
+            @yield('content')
+
+        </div>
 
         <div class="col-3">
 
@@ -35,11 +39,6 @@
 
         </div>
 
-        <div class="col-8">
-
-            @yield('content')
-
-        </div>
 
     </div>
 

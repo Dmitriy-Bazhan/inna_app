@@ -1,6 +1,8 @@
 .left-nav-menu-first-block {
-    border:solid 1px #0f1640;
     background: #0f1640;
+    border-top: solid 5px #757575;
+    border-left: solid 5px #757575;
+    border-right: solid 5px #757575;
 }
 
 .left-nav-menu-first-block-text {
@@ -10,7 +12,9 @@
 }
 
 .left-nav-menu-second-block {
-    border:solid 1px #8489a5;
+    border-bottom: solid 5px #757575;
+    border-left: solid 5px #757575;
+    border-right: solid 5px #757575;
     background: #8489a5;
 }
 
@@ -18,4 +22,8 @@
     color: #0f1640;
     font-size: 14px;
     font-weight: bold;
+}
+
+.left-nav-menu-main-block {
+
 }

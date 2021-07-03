@@ -19,3 +19,15 @@
     margin-left: 1%;
     width: 90%;
 }
+
+.homepage-box-first-image {
+    width: 60%;
+    float: left;
+    margin: 1% 1% 0.5% 0;
+}
+
+.homepage-text-before-first-images {
+    font-weight: 600;
+    font-size: 16pt;
+    color: black;
+}

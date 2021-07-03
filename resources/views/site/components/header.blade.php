@@ -4,7 +4,7 @@
 
     <div class="row">
 
-        <div class="col-1">
+        <div class="col-3 header-block">
 
             <img src=" {{ asset('images/01.jpg') }}" style="height: 25px; width: 25px;">
 
@@ -12,33 +12,33 @@
 
         </div>
 
-        <div class="col-1">
+        <div class="col-1 header-block">
 
             <span class="header-text">Магазин</span>
 
         </div>
 
-        <div class="col-1">
+        <div class="col-1 header-block">
 
             <span class="header-text">Блог</span>
 
         </div>
 
-        <div class="col-1">
+        <div class="col-1 header-block">
 
             <span class="header-text">Видеоблог</span>
 
         </div>
 
 
-        <div class="col-1">
+        <div class="col-1 header-block">
 
             <span class="header-text">Контакты</span>
 
         </div>
 
 
-        <div class="col-1">
+        <div class="col-1 header-block">
 
             <span class="header-text">Кто мы</span>
 
@@ -46,15 +46,15 @@
 
 
 
-        <div class="col-1 offset-1">
+        <div class="col-1 header-block">
 
-            <a href="">UA</a>
-            <a href="">RU</a>
-            <a href="">EN</a>
+            <a href=""><span class="header-text">UA</span></a>
+            <a href=""><span class="header-text">RU</span></a>
+{{--            <a href=""><span class="header-text">EN</span></a>--}}
 
         </div>
 
-        <div class="col-2">
+        <div class="col-2 header-block">
 
             <form>
 
@@ -68,15 +68,15 @@
 
         @if(isset(Auth::user()->id) && Auth::user()->id != null)
 
-            <div class="col-2">
+            <div class="col-1 header-block">
 
-                <a href=" {{ route('dashboard') }}"><span class="header-text">Вы зашли {{ Auth::user()->name }}</span></a>
+                <a href=" {{ route('dashboard') }}"><span class="header-text"> {{ Auth::user()->name }}</span></a>
 
             </div>
 
         @else
 
-            <div class="col-2">
+            <div class="col-1 header-block">
 
                 <a href=" {{ route('login') }}"><span class="header-text">Login</span></a>
                 <a href=" {{ route('register') }}"><span class="header-text">Register</span></a>
