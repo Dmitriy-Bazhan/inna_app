@@ -1,0 +1,11 @@
+.site-header2 {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border-bottom: solid 1px black;
+}
+
+.header2-text {
+    color: #3f3f3f;
+    font-weight: bold;
+    font-size: 15px;
+}

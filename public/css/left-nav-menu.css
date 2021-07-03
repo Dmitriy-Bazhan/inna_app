@@ -1,0 +1,21 @@
+.left-nav-menu-first-block {
+    border:solid 1px #0f1640;
+    background: #0f1640;
+}
+
+.left-nav-menu-first-block-text {
+    color: #8489a5;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.left-nav-menu-second-block {
+    border:solid 1px #8489a5;
+    background: #8489a5;
+}
+
+.left-nav-menu-second-block-text {
+    color: #0f1640;
+    font-size: 14px;
+    font-weight: bold;
+}

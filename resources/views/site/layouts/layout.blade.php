@@ -19,13 +19,23 @@
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
+@include('site.components.header')
+
+{{--@include('site.components.header2')--}}
+
+<br>
+
 <div class="container-fluid">
 
     <div class="row">
 
-        <div class="col-8 content-box offset-2">
+        <div class="col-3">
 
-            @include('site.components.header')
+            @include('site.components.left-nav-menu')
+
+        </div>
+
+        <div class="col-8">
 
             @yield('content')
 

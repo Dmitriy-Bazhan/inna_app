@@ -1,11 +1,11 @@
 .content-box {
     box-shadow: 10px 10px 10px #575757;
     border: dotted 1px #575757;
-    background-color: #ab8d47;
+    background-color: white;
 }
 
 body {
-    background: #866b5b;
+    background: white;
 }
 
 /*FOOTER*/
