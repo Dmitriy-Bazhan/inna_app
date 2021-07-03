@@ -4,462 +4,99 @@
 
     <div class="container-fluid">
 
-        <div class="row">
+        <div class="row homepage-big-block-post">
 
-            <div class="col-10 offset-1">
+            @if(isset($posts) && $posts->count() > 0)
 
-                <span class="homepage-text-before-first-images">
-                    <img class="homepage-box-first-image" src="{{ asset('images/01.jpg') }}">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
-                    libero quas reiciendis sequi tempora totam veniam voluptatem.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus
-                     ratione, reiciendis sit tenetur ut veritatis vitae!
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
-                    libero quas reiciendis sequi tempora totam veniam voluptatem.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus
-                     ratione, reiciendis sit tenetur ut veritatis vitae!
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
-                    libero quas reiciendis sequi tempora totam veniam voluptatem.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus
-                     ratione, reiciendis sit tenetur ut veritatis vitae!
+                @foreach($posts as $post)
 
+                    @if($loop->iteration == 1)
+
+                        <div class="col-11 offset-1">
+
+                            <h4><span>{{ mb_substr($post->created_at, 0 , -8) }}</span> : {{ $post->data[0]->title }}</h4>
+
+                            <span class="homepage-text-before-first-images">
+                    <img class="homepage-box-first-image"
+                         src="{{ asset('storage/image_big/' . $post->image_big. '?' . rand(0,100)) }}">
+                    {{ $post->data[0]->content }}
                 </span>
+                            <br>
 
-            </div>
+                        </div>
 
-        </div>
+                    @else
 
-        <div class="row">
+                        <div class="col-3 offset-1 homepage-small-block-post">
 
-            <div class="col-10 offset-1">
 
-                <h2>Next</h2>
+                            @if(isset($post->image_big) && file_exists('storage/image_big/' . $post->image_big))
+                                <span class="homepage-text-before-first-images">
+                            <img class="homepage-box-image"
+                                 src="{{ asset('storage/image_big/' . $post->image_big . '?' . rand(0,100)) }}">
+                            </span>
+                            @else
+                                <span class="homepage-text-before-first-images">
+                            <img class="homepage-box-image"
+                                 src="{{ asset('/images/ava/no-photo.webp') }}">
 
-                <span class="homepage-text-after-images">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
-                    libero quas reiciendis sequi tempora totam veniam voluptatem.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus
-                     ratione, reiciendis sit tenetur ut veritatis vitae!
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis cupiditate doloribus
-                    dolorum eius enim impedit labore placeat sit voluptates.</span>
+                            </span>
 
-            </div>
 
-        </div>
+                            @endif
 
-        <div class="row">
+                            <h4><span>{{ mb_substr($post->created_at, 0 , -8) }}</span> : {{ $post->data[0]->title }}</h4>
+                                <br>
+                                <span class="next-post-text">{{ $post->data[0]->content }}</span>
 
-            <div class="col-3 offset-1">
+                        </div>
 
-                <img class="homepage-box-image" src="{{ asset('images/01.jpg') }}">
+                    @endif
 
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/02.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/03.jpg') }}">
-
-            </div>
+                @endforeach
 
         </div>
 
-        <div class="row">
+        @endif
 
-            <div class="col-10 offset-1">
+        {{--        <div class="row">--}}
 
-                <h2>Next</h2>
+        {{--            <div class="col-10 offset-1">--}}
 
-                <span class="homepage-text-after-images">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
-                    libero quas reiciendis sequi tempora totam veniam voluptatem.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus
-                     ratione, reiciendis sit tenetur ut veritatis vitae!
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis cupiditate doloribus
-                    dolorum eius enim impedit labore placeat sit voluptates.</span>
+        {{--                <h2>Next</h2>--}}
 
-            </div>
+        {{--                <span class="homepage-text-after-images">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum--}}
+        {{--                    libero quas reiciendis sequi tempora totam veniam voluptatem.--}}
+        {{--                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus--}}
+        {{--                     ratione, reiciendis sit tenetur ut veritatis vitae!--}}
+        {{--                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis cupiditate doloribus--}}
+        {{--                    dolorum eius enim impedit labore placeat sit voluptates.</span>--}}
 
-        </div>
+        {{--            </div>--}}
 
-        <div class="row">
+        {{--        </div>--}}
 
-            <div class="col-3 offset-1">
+        {{--        <div class="row">--}}
 
-                <img class="homepage-box-image" src="{{ asset('images/01.jpg') }}">
+        {{--            <div class="col-3 offset-1">--}}
 
-            </div>
+        {{--                <img class="homepage-box-image" src="{{ asset('images/01.jpg') }}">--}}
 
-            <div class="col-3 offset-1">
+        {{--            </div>--}}
 
-                <img class="homepage-box-image" src="{{ asset('images/02.jpg') }}">
+        {{--            <div class="col-3 offset-1">--}}
 
-            </div>
+        {{--                <img class="homepage-box-image" src="{{ asset('images/02.jpg') }}">--}}
 
-            <div class="col-3 offset-1">
+        {{--            </div>--}}
 
-                <img class="homepage-box-image" src="{{ asset('images/03.jpg') }}">
+        {{--            <div class="col-3 offset-1">--}}
 
-            </div>
+        {{--                <img class="homepage-box-image" src="{{ asset('images/03.jpg') }}">--}}
 
-        </div>
+        {{--            </div>--}}
 
-        <div class="row">
-
-            <div class="col-10 offset-1">
-
-                <h2>Next</h2>
-
-                <span class="homepage-text-after-images">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
-                    libero quas reiciendis sequi tempora totam veniam voluptatem.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus
-                     ratione, reiciendis sit tenetur ut veritatis vitae!
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis cupiditate doloribus
-                    dolorum eius enim impedit labore placeat sit voluptates.</span>
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/01.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/02.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/03.jpg') }}">
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-10 offset-1">
-
-                <h2>Next</h2>
-
-                <span class="homepage-text-after-images">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
-                    libero quas reiciendis sequi tempora totam veniam voluptatem.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus
-                     ratione, reiciendis sit tenetur ut veritatis vitae!
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis cupiditate doloribus
-                    dolorum eius enim impedit labore placeat sit voluptates.</span>
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/01.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/02.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/03.jpg') }}">
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-10 offset-1">
-
-                <h2>Next</h2>
-
-                <span class="homepage-text-after-images">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
-                    libero quas reiciendis sequi tempora totam veniam voluptatem.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus
-                     ratione, reiciendis sit tenetur ut veritatis vitae!
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis cupiditate doloribus
-                    dolorum eius enim impedit labore placeat sit voluptates.</span>
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/01.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/02.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/03.jpg') }}">
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-10 offset-1">
-
-                <h2>Next</h2>
-
-                <span class="homepage-text-after-images">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
-                    libero quas reiciendis sequi tempora totam veniam voluptatem.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus
-                     ratione, reiciendis sit tenetur ut veritatis vitae!
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis cupiditate doloribus
-                    dolorum eius enim impedit labore placeat sit voluptates.</span>
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/01.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/02.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/03.jpg') }}">
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-10 offset-1">
-
-                <h2>Next</h2>
-
-                <span class="homepage-text-after-images">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
-                    libero quas reiciendis sequi tempora totam veniam voluptatem.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus
-                     ratione, reiciendis sit tenetur ut veritatis vitae!
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis cupiditate doloribus
-                    dolorum eius enim impedit labore placeat sit voluptates.</span>
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/01.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/02.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/03.jpg') }}">
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-10 offset-1">
-
-                <h2>Next</h2>
-
-                <span class="homepage-text-after-images">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
-                    libero quas reiciendis sequi tempora totam veniam voluptatem.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus
-                     ratione, reiciendis sit tenetur ut veritatis vitae!
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis cupiditate doloribus
-                    dolorum eius enim impedit labore placeat sit voluptates.</span>
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/01.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/02.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/03.jpg') }}">
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-10 offset-1">
-
-                <h2>Next</h2>
-
-                <span class="homepage-text-after-images">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
-                    libero quas reiciendis sequi tempora totam veniam voluptatem.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus
-                     ratione, reiciendis sit tenetur ut veritatis vitae!
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis cupiditate doloribus
-                    dolorum eius enim impedit labore placeat sit voluptates.</span>
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/01.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/02.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/03.jpg') }}">
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-10 offset-1">
-
-                <h2>Next</h2>
-
-                <span class="homepage-text-after-images">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
-                    libero quas reiciendis sequi tempora totam veniam voluptatem.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus
-                     ratione, reiciendis sit tenetur ut veritatis vitae!
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis cupiditate doloribus
-                    dolorum eius enim impedit labore placeat sit voluptates.</span>
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/01.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/02.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/03.jpg') }}">
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-10 offset-1">
-
-                <h2>Next</h2>
-
-                <span class="homepage-text-after-images">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet exercitationem fugiat laborum
-                    libero quas reiciendis sequi tempora totam veniam voluptatem.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque illum ipsam perspiciatis possimus
-                     ratione, reiciendis sit tenetur ut veritatis vitae!
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam corporis cupiditate doloribus
-                    dolorum eius enim impedit labore placeat sit voluptates.</span>
-
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/01.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/02.jpg') }}">
-
-            </div>
-
-            <div class="col-3 offset-1">
-
-                <img class="homepage-box-image" src="{{ asset('images/03.jpg') }}">
-
-            </div>
-
-        </div>
-
-
-
+        {{--        </div>--}}
 
 
     </div>

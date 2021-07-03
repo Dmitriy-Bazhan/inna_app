@@ -16,8 +16,8 @@
 }
 
 .homepage-box-image {
-    margin-left: 1%;
-    width: 90%;
+    width: 100%;
+    margin: 1% 1% 0.5% 0;
 }
 
 .homepage-box-first-image {
@@ -30,4 +30,15 @@
     font-weight: 600;
     font-size: 16pt;
     color: black;
+}
+
+.next-post-text {
+    font-weight: 500;
+    font-size: 12px;
+    color: black;
+}
+
+.homepage-small-block-post, .homepage-big-block-post {
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
