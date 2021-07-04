@@ -55,6 +55,7 @@ class PostsController extends Controller
                 'post_id' => $post_id,
                 'lang' => $lang,
                 'title' => $request->input('title.' . $lang),
+                'short_description' => $request->input('short_description.' . $lang),
                 'content' => $request->input('content.' . $lang),
             ]);
         }
@@ -118,6 +119,7 @@ class PostsController extends Controller
         foreach (['ua', 'ru'] as $key => $lang) {
             $postData = PostData::where('post_id', $id)->where('lang', $lang)->first();
             $postData->content = $request->input('content.' . $lang);
+            $postData->short_description = $request->input('short_description.' . $lang);
             $postData->title = $request->input('title.' . $lang);
             $postData->save();
         }
@@ -147,7 +149,12 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::where('id', $id)->delete();
+        PostData::where('post_id', $id)->delete();
+        Storage::disk('public')->delete('image_big/post_' . $id . '_big_image');
+        Storage::disk('public')->delete('image_small/post_' . $id . '_small_image');
+
+        return redirect(url('admin/posts'));
     }
 
     private function rules()
@@ -156,14 +163,9 @@ class PostsController extends Controller
             'alias' => 'alpha_dash|max:255',
             'title.*' => ['required', 'regex:/^[0-9A-Za-zА-Яа-яґҐЁёІіЇїЄє\'’ʼ.,:;-_\s\ ]+$/u'],
             'content.*' => ['required', 'regex:/^[0-9A-Za-zА-Яа-яґҐЁёІіЇїЄє\'’ʼ.,:;-_\s\ ]+$/u'],
+            'short_description.*' => ['required', 'max:400', 'regex:/^[0-9A-Za-zА-Яа-яґҐЁёІіЇїЄє\'’ʼ.,:;-_\s\ ]+$/u'],
             'imageBig' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'imageSmall' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ];
-    }
-
-    private function getFileExt($fileName)
-    {
-        $ext = substr($fileName, strripos($fileName, '.') + 1, strlen($fileName) - strripos($fileName, '.') + 1);
-        return $ext;
     }
 }

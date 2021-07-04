@@ -35,7 +35,7 @@
 
         <div class="col-3">
 
-            @include('site.components.left-nav-menu')
+            @include('site.components.aside-menu')
 
         </div>
 

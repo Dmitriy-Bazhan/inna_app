@@ -51,7 +51,23 @@
 
     <br>
 
-    {{--    {{ dd($errors) }}--}}
+    @if($errors->count() > 0)
+
+        <div class="contaimer-fluid">
+
+            <div class="row">
+
+                <div class="col-8 offset-2">
+
+                    <span style="color: red; font-size: 14px;font-weight: 600;">Не все поля заполнены или заполнены неправильно. Проверьте поля для русского языка.</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    @endif
 
     <div class="container-fluid">
 
@@ -66,8 +82,13 @@
 
             @endif
 
-            <button class="change_lang" data-lang="ua">UA</button>
-            <button class="change_lang" data-lang="ru">RU</button>
+            <span style="color:blue;font-size: 12px;font-weight: 500;">
+                Кнопки переключения между украинским и русским вариантами статьи
+            </span>
+            <br>
+
+            <button class="change_lang" data-lang="ua">Описание на украинском</button>
+            <button class="change_lang" data-lang="ru">Описание на русском</button>
             <br>
             <br>
 
@@ -108,6 +129,47 @@
 
                                     <input type="text" name="title[{{ $lang }}]" class="form-control input_in_admin"
                                            value="{{ old('title.' . $lang) }}">
+
+                                @endif
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {{-- Description --}}
+                    <div class="form-group">
+
+                        <div class="row">
+
+                            <div class="col-12">
+
+                                <div class="col-3">
+                                    <label class="control-label">Краткое описание {{ mb_strtoupper($lang) }} (максимум
+                                        400 символов): </label>
+                                </div>
+
+                                @if($errors->has('short_description.'. $lang))
+
+                                    @error('short_description.'. $lang)
+
+                                    <textarea class="form-control input_in_admin" rows="4" maxlength="400"
+                                              name="short_description[{{$lang}}]"
+                                              style="border: solid 1px red">{{ old('short_description.'. $lang) }}</textarea>
+
+                                    @enderror
+
+                                @elseif(isset($post->data[$key]->short_description))
+
+                                    <textarea class="form-control input_in_admin" rows="4" maxlength="400"
+                                              name="short_description[{{$lang}}]">{{ $post->data[$key]->short_description }}</textarea>
+
+                                @else
+
+                                    <textarea class="form-control input_in_admin" rows="4" maxlength="400"
+                                              name="short_description[{{$lang}}]">{{ old('short_description.'. $lang) }}</textarea>
 
                                 @endif
 
@@ -239,6 +301,44 @@
 
         </form>
 
+
+    </div>
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-2 offset-8">
+
+                @if(isset($post))
+
+                    <button class="btn btn-info"
+                            onclick="event.preventDefault();
+                            $('.my-form').submit();">Изменить
+                    </button>
+
+
+                @else
+
+                    <button class="btn btn-info"
+                            onclick="event.preventDefault();
+                            $('.my-form').submit();">Сохранить
+                    </button>
+
+                @endif
+
+            </div>
+
+            <div class="col-1">
+
+                <a href="{{ url('admin/posts') }}">
+                    <button class="btn btn-danger">Отмена</button>
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
 
     <script>
@@ -283,8 +383,9 @@
                     return function (e) {
                         // Визуализировать миниатюру.
                         $('.' + removeClass).remove();
+                        $('img[data-id=' + list + ']').remove();
                         let span = document.createElement('span');
-                        span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                        span.innerHTML = ['<img class="thumb" data-id="' + list + '" src="', e.target.result,
                             '" title="', theFile.name, '"/>'].join('');
                         document.getElementById(list).append(span);
                     };

@@ -14,14 +14,21 @@
 
                         <div class="col-11 offset-1">
 
-                            <h4><span>{{ mb_substr($post->created_at, 0 , -8) }}</span> : {{ $post->data[0]->title }}</h4>
+                            <h4><span>{{ mb_substr($post->created_at, 0 , -8) }}</span> : {{ $post->data[0]->title }}
+                            </h4>
 
                             <span class="homepage-text-before-first-images">
-                    <img class="homepage-box-first-image"
-                         src="{{ asset('storage/image_big/' . $post->image_big. '?' . rand(0,100)) }}">
-                    {{ $post->data[0]->content }}
-                </span>
-                            <br>
+
+                                @if(isset($post->image_big) && file_exists('storage/image_big/' . $post->image_big))
+                                    <img class="homepage-box-first-image"
+                                         src="{{ asset('storage/image_big/' . $post->image_big. '?' . rand(0,100)) }}">
+                                    {{ mb_substr($post->data[0]->short_description, 0, 400) }}
+                                @else
+                                    <img class="homepage-box-first-image"
+                                         src="{{ asset('/images/ava/no-photo.webp') }}">
+                                    {{ mb_substr($post->data[0]->short_description, 0, 400) }}
+                                @endif
+                            </span>
 
                         </div>
 
@@ -31,23 +38,17 @@
 
 
                             @if(isset($post->image_big) && file_exists('storage/image_big/' . $post->image_big))
-                                <span class="homepage-text-before-first-images">
-                            <img class="homepage-box-image"
-                                 src="{{ asset('storage/image_big/' . $post->image_big . '?' . rand(0,100)) }}">
-                            </span>
+                                <img class="homepage-box-image"
+                                     src="{{ asset('storage/image_big/' . $post->image_big . '?' . rand(0,100)) }}">
                             @else
-                                <span class="homepage-text-before-first-images">
-                            <img class="homepage-box-image"
-                                 src="{{ asset('/images/ava/no-photo.webp') }}">
-
-                            </span>
-
-
+                                <img class="homepage-box-image"
+                                     src="{{ asset('/images/ava/no-photo.webp') }}">
                             @endif
 
-                            <h4><span>{{ mb_substr($post->created_at, 0 , -8) }}</span> : {{ $post->data[0]->title }}</h4>
-                                <br>
-                                <span class="next-post-text">{{ $post->data[0]->content }}</span>
+                            <h4><span>{{ mb_substr($post->created_at, 0 , -8) }}</span> : {{ $post->data[0]->title }}
+                            </h4>
+                            <br>
+                            <span class="next-post-text">{{ mb_substr($post->data[0]->short_description, 0, 400) }}</span>
 
                         </div>
 

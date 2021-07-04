@@ -21,6 +21,7 @@ class CreatePostDataTable extends Migration
             $table->integer('views')->default(0);
             $table->integer('good_rang')->default(0);
             $table->integer('bad_rang')->default(0);
+            $table->text('short_description');
             $table->text('content');
             $table->timestamps();
 

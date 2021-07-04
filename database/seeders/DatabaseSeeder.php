@@ -15,31 +15,67 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Post::create(['alias' => 'first_post']);
-        Post::create(['alias' => 'second_post']);
-        Post::create(['alias' => 'third_post']);
+        $aliases = [1 => 'first_post', 2 => 'second_post', 3 => 'third_post'];
 
-        $posts = Post::all();
-
-        foreach ($posts as $post) {
+        foreach ($aliases as $key => $alias) {
+            Post::create(
+                [
+                    'alias' => $alias,
+                    'image_big' => 'post_' . $key . '_big_image',
+                    'image_small' => 'post_' . $key . '_small_image',
+                ]
+            );
             PostData::create(
                 [
-                    'post_id' => $post->id,
+                    'post_id' => $key,
                     'lang' => 'ua',
-                    'title' => 'POST ' . $post->id . 'TITLE ON UA',
-                    'content' => 'POST ' . $post->id . ' UKRAINIAN CONTENT UKRAINIAN CONTENT UKRAINIAN CONTENT',
+                    'title' => 'POST ' . $key . 'TITLE ON UA',
+                    'short_description' => 'POST ' . $key . ' UKRAINIAN SHORT DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION',
+                    'content' => 'POST ' . $key . ' UKRAINIAN CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT
+                    CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT',
                 ]
             );
 
             PostData::create(
                 [
-                    'post_id' => $post->id,
+                    'post_id' => $key,
                     'lang' => 'ru',
-                    'title' => 'POST ' . $post->id . 'TITLE ON RU',
-                    'content' => 'POST ' . $post->id . ' RUSSIAN CONTENT RUSSIAN CONTENT RUSSIAN CONTENT RUSSIAN CONTENT',
+                    'title' => 'POST ' . $key . 'TITLE ON RU',
+                    'short_description' => 'POST ' . $key . ' RUSSIAN SHORT DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION',
+                    'content' => 'POST ' . $key . ' RUSSIAN CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT
+                    CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT',
                 ]
             );
+
         }
+
+
+//        $posts = Post::all();
+//
+//        foreach ($posts as $post) {
+//            PostData::create(
+//                [
+//                    'post_id' => $post->id,
+//                    'lang' => 'ua',
+//                    'title' => 'POST ' . $post->id . 'TITLE ON UA',
+//                    'short_description' => 'POST ' . $post->id . ' UKRAINIAN SHORT DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION',
+//                    'content' => 'POST ' . $post->id . ' UKRAINIAN CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT
+//                    CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT',
+//
+//                ]
+//            );
+//
+//            PostData::create(
+//                [
+//                    'post_id' => $post->id,
+//                    'lang' => 'ru',
+//                    'title' => 'POST ' . $post->id . 'TITLE ON RU',
+//                    'short_description' => 'POST ' . $post->id . ' RUSSIAN SHORT DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION',
+//                    'content' => 'POST ' . $post->id . ' RUSSIAN CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT
+//                    CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT',
+//                ]
+//            );
+//        }
 
         // \App\Models\User::factory(10)->create();
     }

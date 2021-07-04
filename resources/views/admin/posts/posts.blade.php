@@ -11,7 +11,7 @@
             <div class="col-3 offset-9">
 
                 <a href="{{ url('admin/posts/create') }}">
-                    <button class="btn btn-success">Создать новый пост</button>
+                    <button class="btn btn-success">Добавить новую статью</button>
                 </a>
 
             </div>
@@ -33,6 +33,7 @@
                     <th>Id</th>
                     <th>Alias</th>
                     <th>Title</th>
+                    <th>Description</th>
                     <th>Content</th>
                     <th>PhotoBig</th>
                     <th>PhotoSmall</th>
@@ -47,11 +48,13 @@
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->alias }}</td>
                                 <td>{{ $post->data[0]->title }}</td>
+                                <td>{{ mb_substr($post->data[0]->short_description, 0, 200) . '...' }}</td>
                                 <td>{{ mb_substr($post->data[0]->content, 0, 200) . '...' }}</td>
                                 @if(!is_null($post->image_big))
 
                                     <td><img class="" style="width: 75px; height: 75px;"
-                                             src="{{ asset('storage/image_big/' . $post->image_big . '?' . rand(0,100)) }}"></td>
+                                             src="{{ asset('storage/image_big/' . $post->image_big . '?' . rand(0,100)) }}">
+                                    </td>
 
                                 @else
 
@@ -62,7 +65,8 @@
                                 @if(!is_null($post->image_small))
 
                                     <td><img class="" style="width: 75px; height: 75px;"
-                                             src="{{ asset('storage/image_small/' . $post->image_small . '?' . rand(0,100)) }}"></td>
+                                             src="{{ asset('storage/image_small/' . $post->image_small . '?' . rand(0,100)) }}">
+                                    </td>
 
                                 @else
 
@@ -72,8 +76,21 @@
                                 @endif
 
                                 <td>
-                                    <a href="{{ url('admin/posts/' . $post->id . '/edit') }}">E</a>
+
+                                    <a href="{{ url('admin/posts/' . $post->id . '/edit') }}">Изменить</a>
+
+                                    <form method="POST" action="{{ url('admin/posts/' . $post->id) }}">
+
+                                        @csrf
+
+                                        {{ method_field('DELETE') }}
+
+                                        <input class="remove-post" type="submit" value="Удалить">
+
+                                    </form>
+
                                 </td>
+
                             </tr>
 
                         @endforeach
@@ -112,5 +129,17 @@
         </div>
 
     </div>
+
+    <script>
+        $('.remove-post').click(function (event) {
+            event.preventDefault();
+            let agree = confirm('Вы уверены');
+            if (agree) {
+                $(this).parent().submit();
+
+            }
+
+        });
+    </script>
 
 @endsection

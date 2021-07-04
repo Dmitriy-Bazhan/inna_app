@@ -9,5 +9,5 @@ class PostData extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['post_id', 'lang', 'content' , 'title'];
+    protected $fillable = ['post_id', 'lang', 'content' , 'title' , 'short_description'];
 }

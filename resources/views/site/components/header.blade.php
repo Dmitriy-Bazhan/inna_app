@@ -6,7 +6,7 @@
 
         <div class="col-3 header-block">
 
-            <img src=" {{ asset('images/01.jpg') }}" style="height: 25px; width: 25px;">
+            <img src=" {{ asset('images/ava/site-logo.jpg') }}" style="height: 25px; width: 25px;">
 
             <span class="header-text">Metrise</span>
 
