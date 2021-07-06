@@ -77,7 +77,7 @@
 
                                 <td>
 
-                                    <a href="{{ url('admin/posts/' . $post->id . '/edit') }}">Изменить</a>
+                                    <a class="btn btn-info" href="{{ url('admin/posts/' . $post->id . '/edit') }}">Изменить</a>
 
                                     <form method="POST" action="{{ url('admin/posts/' . $post->id) }}">
 
@@ -85,7 +85,7 @@
 
                                         {{ method_field('DELETE') }}
 
-                                        <input class="remove-post" type="submit" value="Удалить">
+                                        <input class="btn btn-danger remove-post" type="submit" value="Удалить">
 
                                     </form>
 

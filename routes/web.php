@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use \App\Http\Controllers\HomePage\HomePageController;
+use \App\Http\Controllers\Shop\ShopController;
 use \App\Http\Controllers\Admin\UsersController;
 use \App\Http\Controllers\Admin\PostsController;
 
@@ -17,7 +18,10 @@ use \App\Http\Controllers\Admin\PostsController;
 |
 */
 
-Route::get('/', [HomePageController::class, 'index'])->name('/');
+Route::prefix(get_prefix())->group(function(){
+    Route::get('/', [HomePageController::class, 'index'])->name('/');
+    Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+});
 
 
 //LOGIN AND REGISTER

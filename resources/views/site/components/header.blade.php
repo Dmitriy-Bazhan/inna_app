@@ -6,15 +6,15 @@
 
         <div class="col-3 header-block">
 
-            <img src=" {{ asset('images/ava/site-logo.jpg') }}" style="height: 25px; width: 25px;">
+            <img src=" {{ asset('images/ava/site-logo.jpg') }}" style="height: 25px; width: 25px;" alt="">
 
-            <span class="header-text">Metrise</span>
+            <a href="{{ url_with_locale('/') }}"><span class="header-text">Metrise</span></a>
 
         </div>
 
         <div class="col-1 header-block">
 
-            <span class="header-text">Магазин</span>
+            <a href="{{ url_with_locale('/shop') }}"><span class="header-text">Магазин</span></a>
 
         </div>
 
@@ -45,12 +45,23 @@
         </div>
 
 
-
         <div class="col-1 header-block">
 
-            <a href=""><span class="header-text">UA</span></a>
-            <a href=""><span class="header-text">RU</span></a>
-{{--            <a href=""><span class="header-text">EN</span></a>--}}
+            @foreach(['ua', 'ru'] as $locale)
+
+                @if($locale == app()->getLocale())
+
+                    <span class="header-text">{{ mb_strtoupper($locale) }}</span>
+
+                @else
+
+                    @php($path = take_path())
+                    <a href="{{ url($path) }}"><span
+                            class="header-text"  style="color: gray;">{{ mb_strtoupper($locale) }}</span></a>
+
+                @endif
+
+            @endforeach
 
         </div>
 
