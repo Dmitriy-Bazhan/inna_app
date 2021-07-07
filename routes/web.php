@@ -6,6 +6,9 @@ use \App\Http\Controllers\HomePage\HomePageController;
 use \App\Http\Controllers\Shop\ShopController;
 use \App\Http\Controllers\Admin\UsersController;
 use \App\Http\Controllers\Admin\PostsController;
+use \App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\FilterController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,9 +34,14 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 //ADMIN PANEL
-Route::middleware(['auth:sanctum', 'verified', 'checkRole'])->prefix('admin')->group(function () {
+//Route::middleware(['auth:sanctum', 'verified', 'checkRole'])
+Route::prefix('admin')
+    ->group(function () {
     Route::get('/', [UsersController::class, 'showUsers'])->name('admin.users');
     Route::resource('/posts', PostsController::class);
+    Route::resource('/products', ProductController::class);
+    Route::resource('/category', CategoryController::class);
+    Route::resource('/filters', FilterController::class);
 });
 
 

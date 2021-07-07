@@ -52,6 +52,8 @@
                                 <td>{{ mb_substr($post->data[0]->content, 0, 200) . '...' }}</td>
                                 @if(!is_null($post->image_big))
 
+{{--                                    @php($storagePath  = \Illuminate\Support\Facades\Storage::disk('public')->getDriver()->getAdapter()->getPathPrefix())--}}
+
                                     <td><img class="" style="width: 75px; height: 75px;"
                                              src="{{ asset('storage/image_big/' . $post->image_big . '?' . rand(0,100)) }}">
                                     </td>
