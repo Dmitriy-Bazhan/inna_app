@@ -15,8 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $aliases = [1 => 'first_post', 2 => 'second_post', 3 => 'third_post'];
-
+        $aliases = [1 => 'first_post', 2 => 'second_post', 3 => 'third_post', 4 => 'fourth_post'];
         foreach ($aliases as $key => $alias) {
             Post::create(
                 [
@@ -35,7 +34,6 @@ class DatabaseSeeder extends Seeder
                     CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT',
                 ]
             );
-
             PostData::create(
                 [
                     'post_id' => $key,
@@ -48,35 +46,6 @@ class DatabaseSeeder extends Seeder
             );
 
         }
-
-
-//        $posts = Post::all();
-//
-//        foreach ($posts as $post) {
-//            PostData::create(
-//                [
-//                    'post_id' => $post->id,
-//                    'lang' => 'ua',
-//                    'title' => 'POST ' . $post->id . 'TITLE ON UA',
-//                    'short_description' => 'POST ' . $post->id . ' UKRAINIAN SHORT DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION',
-//                    'content' => 'POST ' . $post->id . ' UKRAINIAN CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT
-//                    CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT',
-//
-//                ]
-//            );
-//
-//            PostData::create(
-//                [
-//                    'post_id' => $post->id,
-//                    'lang' => 'ru',
-//                    'title' => 'POST ' . $post->id . 'TITLE ON RU',
-//                    'short_description' => 'POST ' . $post->id . ' RUSSIAN SHORT DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION',
-//                    'content' => 'POST ' . $post->id . ' RUSSIAN CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT
-//                    CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT',
-//                ]
-//            );
-//        }
-
         // \App\Models\User::factory(10)->create();
     }
 }

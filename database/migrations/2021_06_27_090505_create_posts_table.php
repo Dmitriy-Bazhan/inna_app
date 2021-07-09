@@ -16,6 +16,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('alias');
+            $table->tinyInteger('is_enabled')->default(1); // Включен - 1/выключен - 0
             $table->string('image_big')->nullable();
             $table->string('image_small')->nullable();
             $table->timestamps();

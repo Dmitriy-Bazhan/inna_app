@@ -15,7 +15,12 @@ class CreateFilterDataTable extends Migration
     {
         Schema::create('filter_data', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('filter_id')->unsigned()->nullable();
+            $table->string('lang');
+            $table->text('content');
             $table->timestamps();
+
+            $table->foreign('filter_id')->references('id')->on('filters')->onDelete('cascade');
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFiltersTable extends Migration
+class CreateCharacteristicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateFiltersTable extends Migration
      */
     public function up()
     {
-        Schema::create('filters', function (Blueprint $table) {
+        Schema::create('characteristics', function (Blueprint $table) {
             $table->id();
-            $table->string('alias');
             $table->string('category_ids');
             //Строка, в которой будет записан массив айдишников категорий,
             //использующих эту характеристику. Вид строки: _25_3_7_. Подчеркивание в начала, конце, и между id.
@@ -31,6 +30,6 @@ class CreateFiltersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('filters');
+        Schema::dropIfExists('characteristics');
     }
 }
