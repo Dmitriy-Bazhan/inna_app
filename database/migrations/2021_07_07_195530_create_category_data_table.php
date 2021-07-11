@@ -20,6 +20,11 @@ class CreateCategoryDataTable extends Migration
             $table->string('title');
             $table->text('short_description');
             $table->text('description');
+
+            $table->string('meta_title', 255)->nullable();
+            $table->string('meta_description', 255)->nullable();
+            $table->string('meta_keywords', 255)->nullable();
+
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');

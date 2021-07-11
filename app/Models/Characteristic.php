@@ -23,7 +23,7 @@ class Characteristic extends Model
         $this->attributes['category_ids'] = $result;
     }
 
-    public function GetCategoryIdsAttribute($value)
+    public function getCategoryIdsAttribute($value)
     {
         $result = [];
         if (strlen($value) > 0) {

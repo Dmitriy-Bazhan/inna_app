@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\CategoryData;
 use App\Models\Post;
 use App\Models\PostData;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -46,6 +49,63 @@ class DatabaseSeeder extends Seeder
             );
 
         }
+
+        $categories = ['Одежда', 'Обувь', 'Фурнитура'];
+        $insideCategories = ['Мужская', 'Женская', 'Детская'];
+
+        foreach ($categories as $category) {
+            $newCategory = Category::create([
+                'alias' => Str::slug($category, '-'),
+            ]);
+
+            $id = $newCategory->id;
+
+            CategoryData::create([
+                'category_id' => $id,
+                'lang' => 'ua',
+                'title' => $category . ' ON UA',
+                'short_description' => 'short_description of ' . $category . ' ON UA',
+                'description' => 'description of category ' . $category . ' ON UA',
+            ]);
+
+            CategoryData::create([
+                'category_id' => $id,
+                'lang' => 'ru',
+                'title' => $category . ' ON RU',
+                'short_description' => 'short_description of ' . $category . ' ON RU',
+                'description' => 'description of category ' . $category . ' ON RU',
+            ]);
+        }
+
+        foreach ($insideCategories as $insideCategory) {
+            foreach ($categories as $key => $category) {
+                $newCategory = Category::create([
+                    'alias' => Str::slug($insideCategory . ' ' . $category, '-'),
+                    'parent_id' => ++$key,
+                ]);
+
+                $id = $newCategory->id;
+
+                CategoryData::create([
+                    'category_id' => $id,
+                    'lang' => 'ua',
+                    'title' => $insideCategory . ' ' . $category . ' ON UA',
+                    'short_description' => 'short_description of ' . $insideCategory . ' ' . $category . ' ON UA',
+                    'description' => 'description of category ' . $insideCategory . ' ' . $category . ' ON UA',
+                ]);
+
+                CategoryData::create([
+                    'category_id' => $id,
+                    'lang' => 'ru',
+                    'title' => $insideCategory . ' ' . $category . ' ON RU',
+                    'short_description' => 'short_description of ' . $insideCategory . ' ' . $category . ' ON RU',
+                    'description' => 'description of category ' . $insideCategory . ' ' . $category . ' ON RU',
+                ]);
+
+            }
+        }
+
+
         // \App\Models\User::factory(10)->create();
     }
 }
