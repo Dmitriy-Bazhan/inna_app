@@ -6,6 +6,8 @@
 
         <div class="row homepage-big-block-post">
 
+            <h1>MEMORY {{ $memory }}</h1>
+
             @if(isset($posts) && $posts->count() > 0)
 
                 @foreach($posts as $post)

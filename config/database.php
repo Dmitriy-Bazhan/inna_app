@@ -119,7 +119,8 @@ return [
 
     'redis' => [
 
-        'client' => env('REDIS_CLIENT', 'phpredis'),
+        'client' => env('REDIS_CLIENT', 'predis'), //по умолчанию phpredis, сменить на predis.
+                                                   // Библиотека composer require predis/predis
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),

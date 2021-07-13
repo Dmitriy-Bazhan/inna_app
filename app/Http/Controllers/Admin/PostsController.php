@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\AddPostEvent;
 use App\Http\Controllers\Controller;
 use App\Models\PostData;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -74,6 +76,11 @@ class PostsController extends Controller
             Post::where('id', $post_id)->update(['image_small' => $fileName]);
         }
 
+        //Используем событие. Просто для практики
+        AddPostEvent::dispatch($post);
+
+        //Очистка кеша находится в Observer (PostObserver, PostDataObserver)
+
         return redirect(url('admin/posts'));
     }
 
@@ -137,6 +144,11 @@ class PostsController extends Controller
             Storage::disk('public')->putFileAs('image_small', $file, $fileName);
             Post::where('id', $id)->update(['image_small' => $fileName]);
         }
+
+        //Используем событие. Просто для практики
+        AddPostEvent::dispatch($post);
+
+        //Очистка кеша находится в Observer (PostObserver, PostDataObserver)
 
         return redirect(url('admin/posts'));
     }
