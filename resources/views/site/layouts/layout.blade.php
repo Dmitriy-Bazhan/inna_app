@@ -9,11 +9,14 @@
 
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" media="screen">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" media="screen">
+    <link href="{{ asset('css/chat.css') }}" rel="stylesheet" type="text/css" media="screen">
     <link href="{{ asset('css/' . $page .'.css') }}" rel="stylesheet" type="text/css" media="screen">
+    <script src="{{ asset('js/app.js') }}"></script>
 
 </head>
 
 <body>
+
 
 <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
@@ -46,6 +49,9 @@
 
 @include('site.components.footer')
 
+@include('site.components.chat')
+
+<script src=" {{ asset('js/chat.js') }}"></script>
 <script src=" {{ asset('js/main.js') }}"></script>
 
 </body>

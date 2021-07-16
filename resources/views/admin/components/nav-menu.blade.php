@@ -14,6 +14,7 @@
     </li>
     <li class="list-group-item"><a class="btn btn-primary stretched-link" href="">Видео</a></li>
     <li class="list-group-item"><a class="btn btn-primary stretched-link" href="">Коментарии</a></li>
+    <li class="list-group-item"><a class="btn btn-primary stretched-link" href=" {{ url('admin/parsing') }}">Парсинг</a></li>
 </ul>
 
 <script>
