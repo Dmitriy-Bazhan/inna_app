@@ -10,12 +10,12 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ChatMessage implements ShouldBroadcast
+class AdminListenMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $message;
     public $user_id;
+    public $message;
     public $username;
 
     /**
@@ -23,10 +23,10 @@ class ChatMessage implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($message, $user_id, $username)
+    public function __construct($user_id, $message, $username)
     {
-        $this->message = $message;
         $this->user_id = $user_id;
+        $this->message = $message;
         $this->username = $username;
     }
 
@@ -37,15 +37,6 @@ class ChatMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('chat.' . $this->user_id );
-    }
-
-    public function broadcastWith()
-    {
-        return [
-            'message' => $this->message,
-            'user_id' => $this->user_id,
-            'username' => $this->username
-        ];
+        return new PrivateChannel('admin-channel');
     }
 }

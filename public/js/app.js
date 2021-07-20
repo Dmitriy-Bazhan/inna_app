@@ -3836,9 +3836,15 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
   wsHost: window.location.hostname,
   wsPort: 6001,
   forceTLS: false,
-  disableStats: true // forceTLS: true,
+  disableStats: true,
+  // forceTLS: true,
   // cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+  auth: {
+    headers: {
+      Authorization: 'Bearer ' + document.querySelector('meta[name="csrf-token"]').getAttribute('content') // csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 
+    }
+  }
 });
 
 /***/ }),

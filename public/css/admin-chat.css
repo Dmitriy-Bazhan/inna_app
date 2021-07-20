@@ -25,8 +25,8 @@
 .chat-content {
     padding-top: 10px;
     width: 100%;
-    min-height: 300px;
-    max-height: 300px;
+    min-height: 600px;
+    max-height: 600px;
     background: white;
     border-left: solid 1px #238443;
     border-right: solid 1px #238443;

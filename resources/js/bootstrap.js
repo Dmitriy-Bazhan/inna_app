@@ -29,5 +29,11 @@ window.Echo = new Echo({
     disableStats: true,
     // forceTLS: true,
     // cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    auth: {
+        headers: {
+            Authorization: 'Bearer ' + document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            // csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    },
 
 });

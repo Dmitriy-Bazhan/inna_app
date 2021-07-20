@@ -5,6 +5,15 @@
     padding-top: 1%;
     padding-bottom: 1%;
 }
+.must-remember-block {
+    border: solid 2px red;
+}
+
+.must-remember {
+    color: black;
+    font-size: 12px;
+    font-weight: 400;
+}
 
 /*body {*/
 /*    background: #1d2124;*/
