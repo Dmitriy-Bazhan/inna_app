@@ -1,5 +1,13 @@
 <ul class="list-group">
-    <li class="list-group-item"><a class="btn btn-primary stretched-link" href="">Чаты</a></li>
+    <li class="list-group-item">
+        <a class="btn btn-primary stretched-link"
+           data-has-incoming-message=""
+           id="chat-link"
+           href="{{ url('admin/chat') }}">
+            <span>Чаты</span>
+            <span class="new-incoming-message">New</span>
+        </a>
+    </li>
     <li class="list-group-item"><a class="btn btn-primary stretched-link" href=" {{ route('admin.users') }}">Пользователи</a>
     </li>
     <li class="list-group-item"><a class="btn btn-primary stretched-link" href=" {{ url('admin/posts') }}">Статьи</a>
@@ -9,13 +17,16 @@
         <ul class="list-group list-in-products">
             <li class="list-group-item"><a class="btn btn-primary stretched-link" href=" {{ url('admin/products') }}">Продукты</a>
             </li>
-            <li class="list-group-item"><a class="btn btn-primary stretched-link" href=" {{ url('admin/category') }}">Категории</a></li>
-            <li class="list-group-item"><a class="btn btn-primary stretched-link" href=" {{ url('admin/filters') }}">Фильтры</a></li>
+            <li class="list-group-item"><a class="btn btn-primary stretched-link" href=" {{ url('admin/category') }}">Категории</a>
+            </li>
+            <li class="list-group-item"><a class="btn btn-primary stretched-link" href=" {{ url('admin/filters') }}">Фильтры</a>
+            </li>
         </ul>
     </li>
     <li class="list-group-item"><a class="btn btn-primary stretched-link" href="">Видео</a></li>
     <li class="list-group-item"><a class="btn btn-primary stretched-link" href="">Коментарии</a></li>
-    <li class="list-group-item"><a class="btn btn-primary stretched-link" href=" {{ url('admin/parsing') }}">Парсинг</a></li>
+    <li class="list-group-item"><a class="btn btn-primary stretched-link" href=" {{ url('admin/parsing') }}">Парсинг</a>
+    </li>
 </ul>
 
 <script>

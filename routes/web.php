@@ -10,6 +10,8 @@ use \App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ParsingController;
+use App\Http\Controllers\Admin\ChatController;
+
 use Illuminate\Support\Facades\Broadcast;
 
 
@@ -45,6 +47,10 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'checkRole'])
         Route::resource('/category', CategoryController::class);
         Route::resource('/filters', FilterController::class);
         Route::get('/parsing', [ParsingController::class, 'index']);
+
+        Route::post('/check_has_new_message', [ChatController::class, 'checkHasNewMessage']);
+
+        Route::get('/chat', [ChatController::class, 'index']);
     });
 
 Broadcast::routes(['middleware' => ['auth:sanctum', 'verified',]]);

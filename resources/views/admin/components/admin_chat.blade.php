@@ -33,7 +33,29 @@
     <script>
 
         $(document).ready(function () {
-            // $('.chat-body').hide();
+            $('.chat-body').hide();
+
+            (function () {
+                $.ajax({
+                    method: 'post',
+                    url: 'check_has_new_message',
+                    dataType: 'json',
+                    data: {
+                        _token: $('meta[name=csrf-token]').attr('content'),
+                    },
+                    success: function (data) {
+                        console.log(data.response);
+                        if (data.response === 'has') {
+                            $('.new-incoming-message').show('slow');
+                        } else {
+                            $('.new-incoming-message').hide('slow');
+                        }
+                    },
+                    error: function (errorThrown) {
+                        console.log(errorThrown);
+                    }
+                });
+            }());
 
             $('.chat-header').click(function () {
                 $('.chat-body').toggle('slow');
@@ -56,9 +78,28 @@
 
                     // console.log('ECHO WORK');
                     // console.log(e.username);
+                    addChatToChatList(e.username, e.user_id);
 
+                    $('.new-incoming-message').show('slow');
                     $('.chat-content').prepend(html);
+
+
                 });
+
+            function addChatToChatList(username, id) {
+                let listItem =
+                    '<div class="chat-list-item-block" data-user-id="' + id + '">' +
+                    '<p>Пользователь ' + username + ' написал сообщение</p>' +
+                    '<button>Открыть чат с ' + username + '</button>' +
+                    '</div>';
+
+                let block = '.chat-list-item-block[data-user-id=' + id + ']';
+                let hasItem = $(block).attr('data-user-id');
+
+                if (hasItem !== id) {
+                    $('.chat-listing').prepend(listItem);
+                }
+            }
 
             function ucFirst(str) {
                 if (!str) return str;

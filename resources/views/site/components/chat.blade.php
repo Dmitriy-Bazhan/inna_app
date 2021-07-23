@@ -86,17 +86,6 @@
                 });
 
 
-            let admin = $('#input_message').attr('data-user-id');
-
-            Echo.private('admin-channel')
-                .listen('AdminListenMessage', function (e) {
-                    if (admin == 1) {
-                        // console.log('ECHO ADMIN WORK');
-                        // console.log(e.user_id);
-                        // console.log(e.message);
-                    }
-                });
-
             $('#send_chat_message').click(function (event) {
                 event.preventDefault();
 

@@ -6,7 +6,9 @@ use App\Models\Category;
 use App\Models\CategoryData;
 use App\Models\Post;
 use App\Models\PostData;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
@@ -18,6 +20,32 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        User::create([
+            'name' => 'Dima',
+            'email' => 'dimka@gmail.com',
+            'role' => '2',
+            'email_verified_at' => now(),
+            'password' => Hash::make('qwerty'),
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::create([
+            'name' => 'Inna',
+            'email' => 'inna@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('qwerty'),
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::create([
+            'name' => 'new',
+            'email' => 'new@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('qwerty'),
+            'remember_token' => Str::random(10),
+        ]);
+
+
         $aliases = [1 => 'first_post', 2 => 'second_post', 3 => 'third_post', 4 => 'fourth_post'];
         foreach ($aliases as $key => $alias) {
             Post::create(
