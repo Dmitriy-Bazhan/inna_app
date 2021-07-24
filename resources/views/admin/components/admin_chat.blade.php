@@ -44,7 +44,7 @@
                         _token: $('meta[name=csrf-token]').attr('content'),
                     },
                     success: function (data) {
-                        console.log(data.response);
+                        // console.log(data.response);
                         if (data.response === 'has') {
                             $('.new-incoming-message').show('slow');
                         } else {
@@ -73,12 +73,11 @@
                         '<span class="chat-message-content-block-username">' + e.username + ': ' + '</span>' +
                         '<span class="chat-message-content-block-text">' + e.message + '</span>' +
                         '</div><div class="warning_in_chat">' +
-                        // '<span data-id="'+ e.id + '" class="oi oi-warning"></span>' +
                         '</div><br></div>';
 
                     // console.log('ECHO WORK');
                     // console.log(e.username);
-                    addChatToChatList(e.username, e.user_id);
+                    // addChatToChatList(e.username, e.user_id);
 
                     $('.new-incoming-message').show('slow');
                     $('.chat-content').prepend(html);

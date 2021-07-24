@@ -1,7 +1,6 @@
 <ul class="list-group">
     <li class="list-group-item">
         <a class="btn btn-primary stretched-link"
-           data-has-incoming-message=""
            id="chat-link"
            href="{{ url('admin/chat') }}">
             <span>Чаты</span>

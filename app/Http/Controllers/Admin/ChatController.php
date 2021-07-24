@@ -35,4 +35,8 @@ class ChatController extends Controller
             'response' => $answer
         ], 200);
     }
+
+    public function completeChat(Request $request){
+
+    }
 }
