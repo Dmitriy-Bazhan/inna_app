@@ -17,7 +17,7 @@
 
 </head>
 
-<body>
+<body data-admin-id="{{ Auth::user()->id }}">
 
 @include('admin.components.header')
 

@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
-use \Illuminate\Support\Facades\Broadcast;
+use \App\Http\Controllers\Admin\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/message', [MessageController::class, 'broadcast']);
+Route::post('/admin_send_message', [ChatController::class, 'broadcast']);
 

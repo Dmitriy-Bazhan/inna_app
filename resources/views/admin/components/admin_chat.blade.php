@@ -35,7 +35,7 @@
         $(document).ready(function () {
             $('.chat-body').hide();
 
-            (function () {
+            (function checkNewMessagesAjax() {
                 $.ajax({
                     method: 'post',
                     url: 'check_has_new_message',
@@ -44,11 +44,10 @@
                         _token: $('meta[name=csrf-token]').attr('content'),
                     },
                     success: function (data) {
-                        // console.log(data.response);
                         if (data.response === 'has') {
                             $('.new-incoming-message').show('slow');
                         } else {
-                            $('.new-incoming-message').hide('slow');
+                            $('.new-incoming-message').hide();
                         }
                     },
                     error: function (errorThrown) {
@@ -63,10 +62,35 @@
 
             Echo.private('admin-channel')
                 .listen('AdminListenMessage', function (e) {
+                    let hasCurrentUserRow =
+                        $('.chat-row-with-user-info').children('.block-with-open-chat').children('.open-chat').attr('data-user-id');
+
+                    console.log(e.user_id);
+                    console.log(hasCurrentUserRow);
+
+                    if (hasCurrentUserRow == undefined || hasCurrentUserRow != e.user_id) {
+                        $.ajax({
+                            method: 'post',
+                            url: 'add_row_to_chats_list',
+                            dataType: 'json',
+                            data: {
+                                user_id: e.user_id,
+                                _token: $('meta[name=csrf-token]').attr('content'),
+                            },
+                            success: function (data) {
+                                $('.chat-row-with-title-of-cols').after(data.response);
+                                $('.modal-chat-with-current-user').hide();
+                            },
+                            error: function (errorThrown) {
+                                console.log(errorThrown);
+                            }
+                        });
+                    }
+
                     let date = new Date();
                     const month = date.toLocaleString('default', {month: 'long'});
                     let timestamp = ucFirst(month) + ' ' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes();
-                    var html = '<div class="chat-incoming-message">' +
+                    let html = '<div class="chat-incoming-message">' +
                         '<div class="chat-message-data-block">' +
                         '<span class="chat-message-data-block-text">' + timestamp + '</span></div>' +
                         '<div class="chat-message-content-block">' +
@@ -75,39 +99,20 @@
                         '</div><div class="warning_in_chat">' +
                         '</div><br></div>';
 
-                    // console.log('ECHO WORK');
-                    // console.log(e.username);
-                    // addChatToChatList(e.username, e.user_id);
-
                     $('.new-incoming-message').show('slow');
                     $('.chat-content').prepend(html);
 
 
                 });
 
-            function addChatToChatList(username, id) {
-                let listItem =
-                    '<div class="chat-list-item-block" data-user-id="' + id + '">' +
-                    '<p>Пользователь ' + username + ' написал сообщение</p>' +
-                    '<button>Открыть чат с ' + username + '</button>' +
-                    '</div>';
-
-                let block = '.chat-list-item-block[data-user-id=' + id + ']';
-                let hasItem = $(block).attr('data-user-id');
-
-                if (hasItem !== id) {
-                    $('.chat-listing').prepend(listItem);
-                }
-            }
-
             function ucFirst(str) {
                 if (!str) return str;
 
                 return str[0].toUpperCase() + str.slice(1);
             }
+
         });
 
     </script>
 
 </div>
-

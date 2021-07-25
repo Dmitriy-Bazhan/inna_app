@@ -76,11 +76,7 @@
                         '<span class="chat-message-content-block-username">' + e.username + ': ' + '</span>' +
                         '<span class="chat-message-content-block-text">' + e.message + '</span>' +
                         '</div><div class="warning_in_chat">' +
-                        // '<span data-id="'+ e.id + '" class="oi oi-warning"></span>' +
                         '</div><br></div>';
-
-                    // console.log('ECHO WORK');
-                    // console.log(e.username);
 
                     $('.chat-content').prepend(html);
                 });

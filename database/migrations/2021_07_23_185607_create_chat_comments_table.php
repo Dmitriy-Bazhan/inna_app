@@ -16,6 +16,7 @@ class CreateChatCommentsTable extends Migration
         Schema::create('chat_comments', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->string('is_user_admin')->nullable();
             $table->text('message');
             $table->string('status')->default('not_answered'); // После обработки (ответа) менять на answered
             $table->timestamps();

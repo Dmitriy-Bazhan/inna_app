@@ -49,6 +49,9 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'checkRole'])
         Route::get('/parsing', [ParsingController::class, 'index']);
 
         Route::post('/check_has_new_message', [ChatController::class, 'checkHasNewMessage']);
+        Route::post('/add_messages_to_modal_chat', [ChatController::class, 'addMessagesToModalChat']);
+        Route::post('/admin_close_the_problems', [ChatController::class, 'completeChat']);
+        Route::post('/add_row_to_chats_list', [ChatController::class, 'addRowToChatsList']);
 
         Route::get('/chat', [ChatController::class, 'index']);
     });
