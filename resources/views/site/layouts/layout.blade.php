@@ -19,7 +19,7 @@
 
 </head>
 
-<body>
+<body @if(Auth::check()) data-user-id="{{ Auth::user()->id }}" @endif>
 
 @include('site.components.header')
 
@@ -53,6 +53,8 @@
     <link href="{{ asset('css/chat.css') }}" rel="stylesheet" type="text/css" media="screen">
 
     @include('site.components.chat')
+
+    <script src=" {{ asset('js/chat.js') }}"></script>
 
 @endif
 

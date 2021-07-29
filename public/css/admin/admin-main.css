@@ -1,0 +1,192 @@
+body {
+    background: #eeeded;
+}
+
+.admin-header {
+    z-index: 10000;
+    position: fixed;
+    /*background-color: #0a9a2c;*/
+}
+
+.admin-header-first-block {
+    padding: 1%;
+    background: #2a3140;
+}
+
+.admin-header-first-block-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+}
+
+.admin-header-second-block, .admin-header-third-block, .admin-header-fourth-block {
+    padding: 1%;
+    background: white;
+    border-bottom: dotted 1px gray;
+}
+
+.admin-header-second-block-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: gray;
+}
+
+.admin-nav-menu-list-item {
+    background: #2a3140;
+}
+
+.admin-nav-menu-list-item-link {
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.admin-nav-menu-list-item-link:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.must-remember-block {
+    border: solid 2px red;
+}
+
+.must-remember {
+    color: black;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.new-incoming-message, .new-incoming-message-on-button-signal {
+    position: absolute;
+    width: 25px;
+    height: 15px;
+    background-color: red;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 10px;
+    text-align: center;
+    bottom: 35px;
+}
+
+.new-incoming-message-on-button-signal {
+    bottom: 20px;
+    right: 15px;
+}
+
+.chat-row-with-title-of-cols {
+    margin: 10px;
+    border-bottom: solid 1px black;
+}
+
+.chat-row-with-title-text {
+    font-size: 14px;
+    color: #1d2124;
+    font-weight: 500;
+}
+
+.chat-row-with-user-info {
+    margin: 10px;
+    padding-bottom: 10px;
+    border-bottom: dotted 1px #1d2124;
+}
+
+.chat-row-with-user-info-text {
+    font-size: 14px;
+    color: #1d2124;
+    font-weight: 500;
+}
+
+.modal-chat-with-current-user {
+    position: fixed;
+    top: 20%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+
+    background: white;
+    z-index: 10000;
+}
+
+.modal-chat-content-block {
+    border-top: solid 5px #238443;
+    border-left: solid 5px #238443;
+    border-right: solid 5px #238443;
+    height: 80%;
+    width: 100%;
+    overflow: auto;
+}
+
+.modal-chat-form {
+    padding-top: 10%;
+    padding-bottom: 10%;
+    border-bottom: solid 5px #238443;
+    border-left: solid 5px #238443;
+    border-right: solid 5px #238443;
+    background: white;
+}
+
+.modal-chat-input {
+    width: 80%;
+    outline: none;
+    border: none;
+    color: gray;
+    font-size: 14px;
+    font-weight: 400;
+    word-wrap: break-word;
+    resize: none;
+    overflow: hidden;
+}
+
+.modal-chat-input:focus {
+    color: black;
+}
+
+.modal-chat-submit {
+    outline: none;
+    border: none;
+    width: 15%;
+    background: #32ff59;
+    border-radius: 20px;
+}
+
+.main-container {
+    /*margin-top: 5%;*/
+}
+
+.input_in_admin {
+    font-size: 14pt;
+    background: transparent;
+    color: black;
+    /*border:none;*/
+    border-top: white;
+    border-left: white;
+    border-right: white;
+    resize: vertical;
+}
+
+.control-label {
+    font-size: 14pt;
+    color: darkgreen;
+    font-weight: 600;
+    text-align: right;
+    float: left;
+    margin-right: 15px;
+}
+
+.admin_image_big, .admin_image_small, .thumb {
+    width: 60%;
+}
+
+.left-nav-menu-main-block {
+    min-height: 100vh;
+    max-height: 100%;
+    background: #2a3140;
+}
+
+.admin-nav-menu-list {
+    position: fixed;
+}
+
+
+
