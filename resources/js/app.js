@@ -6,10 +6,10 @@ import Vue from 'vue';
 
 window.Vue = require('vue');
 
-Vue.component('test-component', require('./components/test.vue').default);
+Vue.component('vue-chat-component', require('./components/vue-chat.vue').default);
 
 window.onload = function () {
     const app = new Vue({
-        el: '#app',
+        el: '#vue-chat',
     });
 }

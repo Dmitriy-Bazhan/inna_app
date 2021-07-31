@@ -50,6 +50,12 @@
 
 @if(auth()->check())
 
+    <script src="{{mix('js/app.js')}}"></script>
+    <div id="vue-chat">
+        <vue-chat-component></vue-chat-component>
+    </div>
+
+
     <link href="{{ asset('css/chat.css') }}" rel="stylesheet" type="text/css" media="screen">
 
     @include('site.components.chat')
