@@ -3814,25 +3814,146 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "test",
   data: function data() {
     return {
-      comments: []
+      chatMessage: "chat-message",
+      chatIncomingMessage: "chat-incoming-message",
+      comments: [],
+      user_id: $('body').attr('data-user-id'),
+      user_name: $('body').attr('data-user-name'),
+      token: $('meta[name=csrf-token]').attr('content')
     };
   },
   methods: {
     getComments: function getComments() {
       var _this = this;
 
-      axios.get('/api/getComments/' + $('body').attr('data-user-id')).then(function (response) {
-        console.log(response.data);
+      axios.get('/api/getComments/' + this.user_id).then(function (response) {
         _this.comments = response.data.comments;
       });
+    },
+    formatData: function formatData(data) {
+      var options = {
+        day: 'numeric',
+        month: 'long',
+        // year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric'
+      };
+
+      function getDate(str) {
+        var date = new Date(str);
+        return date.toLocaleString('ru', options);
+      }
+
+      return getDate(data);
+    },
+    putAdminName: function putAdminName(admin) {
+      var name = '';
+
+      if (admin !== null) {
+        name = 'Admin';
+      } else {
+        name = '';
+      }
+
+      return name;
+    },
+    sendMessageClickEnter: function sendMessageClickEnter(e) {
+      var key = e.which;
+
+      if (key === 13) {
+        this.sendMessage();
+      }
+    },
+    sendMessageClick: function sendMessageClick(event) {
+      event.preventDefault();
+      this.sendMessage();
+    },
+    sendMessage: function sendMessage() {
+      var _this2 = this;
+
+      var message = $('#vue-input_message').val();
+      var user_id = this.user_id;
+      var username = this.user_name;
+      var is_user_admin = null;
+      var created_at = new Date();
+      $('#vue-input_message').val('');
+      axios.post("http://app.lock/api/message", {
+        message: message,
+        user_id: user_id,
+        username: username,
+        is_user_admin: is_user_admin
+      }).then(function (response) {
+        _this2.comments.unshift({
+          'is_user_admin': is_user_admin,
+          'created_at': created_at,
+          'message': message,
+          'user_id': user_id,
+          'username': username
+        });
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    hideShowChatBody: function hideShowChatBody() {
+      $('.chat-body').toggle('slow');
     }
   },
   mounted: function mounted() {
+    var _this3 = this;
+
+    $('.chat-body').hide();
     this.getComments();
+    window.Echo["private"]('chat.' + this.user_id).listen('ChatMessage', function (response) {
+      _this3.comments.unshift(response);
+    });
   }
 });
 
@@ -3925,7 +4046,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.chat-block[data-v-6f79f90a]{\n    position: fixed;\n    top: 25%;\n    left: 25%;\n    width: 25%;\n    height: 25%;\n    background-color: red;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.chat-main-block[data-v-6f79f90a] {\n    position: fixed;\n    bottom: 0;\n    left: 75%;\n    width: 22%;\n    z-index: 10000;\n    /*border: solid 1px #238443;*/\n    border-radius: 10px 30px 0px 0px;\n    background: white;\n}\n.vue-chat-content[data-v-6f79f90a] {\n    padding-top: 10px;\n    width: 100%;\n    min-height: 300px;\n    max-height: 300px;\n    background: white;\n    border-left: solid 1px #238443;\n    border-right: solid 1px #238443;\n    border-bottom: dotted 1px gray;\n    overflow: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -27993,19 +28114,120 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "chat-block" }, [
+  return _c("div", { staticClass: "chat-main-block" }, [
     _c(
-      "ul",
-      _vm._l(_vm.comments, function(comment) {
-        return _c("li", [
-          _vm._v("\n            " + _vm._s(comment.message) + "\n        ")
+      "div",
+      {
+        staticClass: "container-fluid chat-header",
+        on: { click: _vm.hideShowChatBody }
+      },
+      [_vm._m(0)]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "chat-body" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-12 vue-chat-content" },
+            _vm._l(_vm.comments, function(comment) {
+              return _c(
+                "div",
+                {
+                  class: [
+                    comment.is_user_admin === null
+                      ? _vm.chatMessage
+                      : _vm.chatIncomingMessage
+                  ]
+                },
+                [
+                  _c("div", { staticClass: "chat-message-content-block" }, [
+                    _c("div", { staticClass: "chat-message-data-block" }, [
+                      _c(
+                        "span",
+                        { staticClass: "chat-message-data-block-text" },
+                        [_vm._v(_vm._s(_vm.formatData(comment.created_at)))]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "chat-message-content-block" }, [
+                      _c(
+                        "span",
+                        { staticClass: "chat-message-content-block-username" },
+                        [
+                          _vm._v(
+                            _vm._s(_vm.putAdminName(comment.is_user_admin))
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        { staticClass: "chat-message-content-block-text" },
+                        [_vm._v(_vm._s(comment.message))]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("br")
+                  ])
+                ]
+              )
+            }),
+            0
+          )
         ])
-      }),
-      0
-    )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container-fluid chat-form" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("form", { staticClass: "form" }, [
+              _c("textarea", {
+                staticClass: "chat-input",
+                attrs: {
+                  id: "vue-input_message",
+                  rows: "5",
+                  placeholder: "Введите сообщение",
+                  "data-user-id": _vm.user_id,
+                  "data-user-name": _vm.user_name,
+                  name: "chat_message"
+                },
+                on: { keypress: _vm.sendMessageClickEnter }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "chat-submit",
+                  on: { click: _vm.sendMessageClick }
+                },
+                [
+                  _vm._v(
+                    "\n                            ⇑\n                        "
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-10 " }, [
+        _c("p", { staticClass: "chat-header-text" }, [
+          _vm._v("Напишите нам, мы в онлайн!! ")
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

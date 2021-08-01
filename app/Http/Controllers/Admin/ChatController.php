@@ -105,7 +105,7 @@ class ChatController extends Controller
     public function getComments(Request $request, $user_id = null)
     {
         if (!is_null($user_id)) {
-            $comments = ChatComment::where('user_id', $user_id)->get()->toArray();
+            $comments = ChatComment::where('user_id', $user_id)->orderByDesc('created_at')->get()->toArray();
         } else {
             $comments = ChatComment::all()->toArray();
         }
