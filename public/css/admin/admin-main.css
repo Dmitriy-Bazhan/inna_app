@@ -1,9 +1,50 @@
+body {
+    background: #eeeded;
+}
+
 .admin-header {
     z-index: 10000;
     position: fixed;
-    background-color: #0a9a2c;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    /*background-color: #0a9a2c;*/
+}
+
+.admin-header-first-block {
+    padding: 1%;
+    background: #2a3140;
+}
+
+.admin-header-first-block-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+}
+
+.admin-header-second-block, .admin-header-third-block, .admin-header-fourth-block {
+    padding: 1%;
+    background: white;
+    border-bottom: dotted 1px gray;
+}
+
+.admin-header-second-block-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: gray;
+}
+
+.admin-nav-menu-list-item {
+    background: #2a3140;
+}
+
+.admin-nav-menu-list-item-link {
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.admin-nav-menu-list-item-link:hover {
+    text-decoration: none;
+    color: white;
 }
 
 .must-remember-block {
@@ -136,5 +177,16 @@
 .admin_image_big, .admin_image_small, .thumb {
     width: 60%;
 }
+
+.left-nav-menu-main-block {
+    min-height: 100vh;
+    max-height: 100%;
+    background: #2a3140;
+}
+
+.admin-nav-menu-list {
+    position: fixed;
+}
+
 
 

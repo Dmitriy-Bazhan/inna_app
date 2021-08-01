@@ -19,7 +19,7 @@
 
 </head>
 
-<body>
+<body @if(Auth::check()) data-user-id="{{ Auth::user()->id }}" data-user-name="{{ Auth::user()->name }}" @endif>
 
 @include('site.components.header')
 
@@ -50,9 +50,17 @@
 
 @if(auth()->check())
 
+    <script src="{{mix('js/app.js')}}"></script>
+    <div id="vue-chat">
+        <vue-chat-component></vue-chat-component>
+    </div>
+
+
     <link href="{{ asset('css/chat.css') }}" rel="stylesheet" type="text/css" media="screen">
 
-    @include('site.components.chat')
+{{--    @include('site.components.chat')--}}
+
+    <script src=" {{ asset('js/chat.js') }}"></script>
 
 @endif
 

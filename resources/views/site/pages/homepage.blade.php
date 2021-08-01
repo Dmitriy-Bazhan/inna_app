@@ -50,7 +50,8 @@
                             <h4><span>{{ mb_substr($post->created_at, 0 , -8) }}</span> : {{ $post->data[0]->title }}
                             </h4>
                             <br>
-                            <span class="next-post-text">{{ mb_substr($post->data[0]->short_description, 0, 400) }}</span>
+                            <span
+                                class="next-post-text">{{ mb_substr($post->data[0]->short_description, 0, 400) }}</span>
 
                         </div>
 
@@ -58,9 +59,18 @@
 
                 @endforeach
 
-        </div>
+            @else
 
-        @endif
+                <div class="col-11 offset-1">
+
+                    <img class="homepage-box-first-image"
+                         src="{{ asset('images/ava/no-img.png') }}">
+
+                </div>
+
+            @endif
+
+        </div>
 
     </div>
 

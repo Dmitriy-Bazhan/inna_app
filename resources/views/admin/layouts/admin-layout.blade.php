@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $page }}</title>
 
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" media="screen">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" media="screen">
-    <link href="{{ asset('css/admin.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/admin/admin-main.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/admin/admin-chat.css') }}" rel="stylesheet" type="text/css" media="screen">
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
@@ -25,17 +28,15 @@
 <br>
 <br>
 
-
 <div class="container-fluid main-container">
 
     <div class="row">
 
-        <div class="col-2">
+        <div class="col-2 left-nav-menu-main-block">
 
             @include('admin.components.nav-menu')
 
         </div>
-
 
         <div class="col-10">
 
@@ -52,7 +53,6 @@
 
             </div>
 
-
             @yield('content')
 
         </div>
@@ -61,9 +61,9 @@
 
 </div>
 
-<link href="{{ asset('css/admin-chat.css') }}" rel="stylesheet" type="text/css" media="screen">
-
 @include('admin.components.admin_chat')
+
+<script src="{{ asset('js/admin/admin-real-chat.js') }}"></script>
 
 </body>
 

@@ -91,7 +91,8 @@ class ChatController extends Controller
         ], 200);
     }
 
-    public function addRowToChatsList(Request $request){
+    public function addRowToChatsList(Request $request)
+    {
 
         $data['user'] = User::where('id', $request->input('user_id'))->select('id', 'name')->first();
 
@@ -99,4 +100,19 @@ class ChatController extends Controller
             'response' => view('admin.components.chat-row', $data)->render()
         ], 200);
     }
+
+    //VUE EXAMPLE
+    public function getComments(Request $request, $user_id = null)
+    {
+        if (!is_null($user_id)) {
+            $comments = ChatComment::where('user_id', $user_id)->orderByDesc('created_at')->get()->toArray();
+        } else {
+            $comments = ChatComment::all()->toArray();
+        }
+
+        return response()->json([
+            'comments' => $comments
+        ], 200);
+    }
+
 }

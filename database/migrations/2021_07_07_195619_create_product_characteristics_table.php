@@ -16,6 +16,7 @@ class CreateProductCharacteristicsTable extends Migration
         Schema::create('product_characteristics', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('product_id')->unsigned()->nullable();
+            $table->integer('characteristic_id');
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products');

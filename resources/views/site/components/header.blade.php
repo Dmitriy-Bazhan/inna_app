@@ -77,7 +77,7 @@
 
         </div>
 
-        @if(isset(Auth::user()->id) && Auth::user()->id != null)
+        @if(Auth::check())
 
             <div class="col-1 header-block">
 

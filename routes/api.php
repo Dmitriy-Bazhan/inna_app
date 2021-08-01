@@ -23,3 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/message', [MessageController::class, 'broadcast']);
 Route::post('/admin_send_message', [ChatController::class, 'broadcast']);
 
+Route::get('/getComments/{user_id}', [ChatController::class, 'getComments']);
+

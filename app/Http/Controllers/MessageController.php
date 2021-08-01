@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\AdminListenMessage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Events\ChatMessage;
 use App\Models\ChatComment;
@@ -21,7 +22,6 @@ class MessageController extends Controller
             'user_id' => (int)$request->input('user_id'),
             'message' => $request->input('message'),
         ]);
-
 
         broadcast(new AdminListenMessage($request->input('user_id'), $request->input('message'), $request->input('username')));
         broadcast(new ChatMessage($request->input('message'), $request->input('user_id'), $request->input('username')))->toOthers();

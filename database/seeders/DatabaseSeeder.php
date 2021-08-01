@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'dimka@gmail.com',
             'role' => '2',
             'email_verified_at' => now(),
-            'password' => Hash::make('qwerty'),
+            'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
 
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Inna',
             'email' => 'inna@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('qwerty'),
+            'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
 
@@ -41,7 +41,15 @@ class DatabaseSeeder extends Seeder
             'name' => 'new',
             'email' => 'new@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('qwerty'),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::create([
+            'name' => 'test',
+            'email' => 'test@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
 
@@ -132,6 +140,8 @@ class DatabaseSeeder extends Seeder
 
             }
         }
+
+        $products = [];
 
 
         // \App\Models\User::factory(10)->create();

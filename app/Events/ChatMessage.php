@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use Carbon\Carbon;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -17,6 +18,7 @@ class ChatMessage implements ShouldBroadcast
     public $message;
     public $user_id;
     public $username;
+    public $created_at;
 
     /**
      * Create a new event instance.
@@ -28,6 +30,7 @@ class ChatMessage implements ShouldBroadcast
         $this->message = $message;
         $this->user_id = $user_id;
         $this->username = $username;
+        $this->created_at = Carbon::now();;
     }
 
     /**
@@ -45,7 +48,8 @@ class ChatMessage implements ShouldBroadcast
         return [
             'message' => $this->message,
             'user_id' => $this->user_id,
-            'username' => $this->username
+            'username' => $this->username,
+            'created_at' => $this->created_at
         ];
     }
 }

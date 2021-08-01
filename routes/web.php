@@ -29,6 +29,8 @@ use Illuminate\Support\Facades\Broadcast;
 Route::prefix(get_prefix())->group(function () {
     Route::get('/', [HomePageController::class, 'index'])->name('/');
     Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+
+    Route::post('/add_messages_to_chat', [ChatController::class, 'addMessagesToModalChat']);
 });
 
 
