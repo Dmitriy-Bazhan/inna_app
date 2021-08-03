@@ -3,7 +3,7 @@
         <div class="container-fluid chat-header" v-on:click="hideShowChatBody">
             <div class="row">
                 <div class="col-10 ">
-                    <p class="chat-header-text">Напишите нам, мы в онлайн!! </p>
+                    <p class="chat-header-text">{{ title }}</p>
                 </div>
             </div>
         </div>
@@ -63,7 +63,8 @@ export default {
             comments: [],
             user_id: $('body').attr('data-user-id'),
             user_name: $('body').attr('data-user-name'),
-            token: $('meta[name=csrf-token]').attr('content')
+            token: $('meta[name=csrf-token]').attr('content'),
+            title: i18n.chat.title
         }
     },
     methods: {
@@ -147,7 +148,10 @@ export default {
         window.Echo.private('chat.' + this.user_id)
             .listen('ChatMessage', (response) => {
                 this.comments.unshift(response);
-            });
+            }).error((error) => {
+                console.log('ERROR IN SOCKETS CONNTECT : ' + error);
+        });
+
     }
 }
 </script>

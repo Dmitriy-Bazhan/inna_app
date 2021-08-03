@@ -25,15 +25,10 @@
             $(document).ready(function () {
                 Echo.private('chat.' + {{ $user->id }})
                     .listen('ChatMessage', function (e) {
-
                         let element = '.modal-chat-with-current-user[data-user-id=' + {{ $user->id }} +']';
-
-                        let date = new Date();
-                        const month = date.toLocaleString('default', {month: 'long'});
-                        let timestamp = ucFirst(month) + ' ' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes();
                         let html = '<div class="chat-incoming-message">' +
                             '<div class="chat-message-data-block">' +
-                            '<span class="chat-message-data-block-text">' + timestamp + '</span></div>' +
+                            '<span class="chat-message-data-block-text">' + formatData(e.created_at) + '</span></div>' +
                             '<div class="chat-message-content-block">' +
                             '<span class="chat-message-content-block-username">' + e.username + ': ' + '</span>' +
                             '<span class="chat-message-content-block-text">' + e.message + '</span>' +
@@ -51,9 +46,21 @@
                         $(element).children('.modal-chat-content-block').prepend(html);
                     });
 
-                function ucFirst(str) {
-                    if (!str) return str;
-                    return str[0].toUpperCase() + str.slice(1);
+                function formatData(data) {
+                    let options = {
+                        day: 'numeric',
+                        month: 'long',
+                        // year: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric'
+                    }
+
+                    function getDate(str) {
+                        let date = new Date(str);
+                        return date.toLocaleString('ru', options)
+                    }
+
+                    return getDate(data);
                 }
             });
         </script>
@@ -63,10 +70,10 @@
     <div data-user-id="{{ $user->id }}" class="col-2 close-problem-block">
 
 
-            <button data-user-id="{{ $user->id }}"
-                    class="btn btn-success close-problem">
-                Сделано
-            </button>
+        <button data-user-id="{{ $user->id }}"
+                class="btn btn-success close-problem">
+            Сделано
+        </button>
 
 
     </div>

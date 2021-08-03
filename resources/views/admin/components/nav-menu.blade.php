@@ -7,7 +7,7 @@
             <span class="new-incoming-message">New</span>
         </a>
     </li>
-    <li class="list-group-item  admin-nav-menu-list-item"><a class="admin-nav-menu-list-item-link" href=" {{ route('admin.users') }}">Пользователи</a>
+    <li class="list-group-item  admin-nav-menu-list-item"><a class="admin-nav-menu-list-item-link" href=" {{ url('admin/users') }}">Пользователи</a>
     </li>
     <li class="list-group-item"><a class="admin-nav-menu-list-item-link" href=" {{ url('admin/posts') }}">Статьи</a>
     </li>
