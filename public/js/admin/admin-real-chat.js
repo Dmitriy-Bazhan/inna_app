@@ -12,7 +12,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (data.response === 'has') {
-                    $('.new-incoming-message').show('slow');
+                    $('.new-incoming-message').show();
                 }
             },
             error: function (errorThrown) {
@@ -98,7 +98,7 @@ $(document).ready(function () {
                         let timestamp = ucFirst(month) + ' ' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes();
                         let html = '<div class="chat-incoming-message">' +
                             '<div class="chat-message-data-block">' +
-                            '<span class="chat-message-data-block-text">' + timestamp + '</span></div>' +
+                            '<span class="chat-message-data-block-text">' + formatData(index.created_at) + '</span></div>' +
                             '<div class="chat-message-content-block">' +
                             '<span class="chat-message-content-block-username">' + index.user.name + ': ' + '</span>' +
                             '<span class="chat-message-content-block-text">' + index.message + '</span>' +
@@ -114,7 +114,7 @@ $(document).ready(function () {
                         let timestamp = ucFirst(month) + ' ' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes();
                         let html = '<div class="chat-message">' +
                             '<div class="chat-message-data-block">' +
-                            '<span class="chat-message-data-block-text">' + timestamp + '</span></div>' +
+                            '<span class="chat-message-data-block-text">' + formatData(index.created_at) + '</span></div>' +
                             '<div class="chat-message-content-block">' +
                             '<span class="chat-message-content-block-text">' + index.message + '</span>' +
                             '</div><div class="warning_in_chat">' +
@@ -196,6 +196,23 @@ $(document).ready(function () {
         });
 
     });
+
+    function formatData(data) {
+        let options = {
+            day: 'numeric',
+            month: 'long',
+            // year: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric'
+        }
+
+        function getDate(str) {
+            let date = new Date(str);
+            return date.toLocaleString('ru', options)
+        }
+
+        return getDate(data);
+    }
 
     function ucFirst(str) {
         if (!str) return str;

@@ -35,5 +35,6 @@ window.Echo = new Echo({
             // csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         }
     },
+    enabledTransports: ['ws', 'wss']
 
 });

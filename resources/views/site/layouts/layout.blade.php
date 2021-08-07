@@ -16,6 +16,7 @@
     <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ '/js/lang/' . app()->getLocale() }}"></script>
 
 </head>
 
@@ -54,6 +55,7 @@
     <div id="vue-chat">
         <vue-chat-component></vue-chat-component>
     </div>
+
 
 
     <link href="{{ asset('css/chat.css') }}" rel="stylesheet" type="text/css" media="screen">

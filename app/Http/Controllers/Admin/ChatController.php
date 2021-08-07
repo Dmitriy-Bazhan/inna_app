@@ -53,7 +53,7 @@ class ChatController extends Controller
             ], 422);
         }
 
-        $comments = ChatComment::with('user')->where('user_id', $request->input('user_id'))->select('message', 'user_id', 'is_user_admin')->get()->toArray();
+        $comments = ChatComment::with('user')->where('user_id', $request->input('user_id'))->select('message', 'user_id', 'is_user_admin', 'created_at')->get()->toArray();
 
         return response()->json([
             'response' => $comments

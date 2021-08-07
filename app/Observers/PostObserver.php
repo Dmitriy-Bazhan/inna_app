@@ -17,7 +17,7 @@ class PostObserver
      */
     public function created(Post $post)
     {
-        Cache::store('redis')->forget('posts');
+        $this->clearCache();
     }
 
     /**
@@ -28,7 +28,7 @@ class PostObserver
      */
     public function updated(Post $post)
     {
-        Cache::store('redis')->forget('posts');
+        $this->clearCache();
     }
 
     /**
@@ -39,7 +39,7 @@ class PostObserver
      */
     public function deleted(Post $post)
     {
-        Cache::store('redis')->forget('posts');
+        $this->clearCache();
     }
 
     /**
@@ -50,7 +50,7 @@ class PostObserver
      */
     public function restored(Post $post)
     {
-        Cache::store('redis')->forget('posts');
+        $this->clearCache();
     }
 
     /**
@@ -61,6 +61,18 @@ class PostObserver
      */
     public function forceDeleted(Post $post)
     {
-        Cache::store('redis')->forget('posts');
+        $this->clearCache();
+    }
+
+    private function clearCache()
+    {
+
+        try {
+            Cache::store('redis')->forget('posts');
+
+        } catch (\Exception $exception) {
+            //Временно. Исправить когда разберусь с логами
+            dd('Redis not work');
+        }
     }
 }

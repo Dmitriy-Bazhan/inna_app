@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ParsingController;
 use App\Http\Controllers\Admin\ChatController;
+use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Support\Facades\Broadcast;
 
@@ -43,7 +44,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //ADMIN PANEL
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'checkRole'])
     ->group(function () {
-        Route::get('/', [UsersController::class, 'showUsers'])->name('admin.users');
+        Route::get('/users', [UsersController::class, 'showUsers'])->name('admin.users');
         Route::resource('/posts', PostsController::class);
         Route::resource('/products', ProductController::class);
         Route::resource('/category', CategoryController::class);
@@ -60,3 +61,23 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'checkRole'])
 
 Broadcast::routes(['middleware' => ['auth:sanctum', 'verified',]]);
 
+
+// Localization for Vue
+Route::get('/js/lang/{lang}', function ($lang) {
+    Cache::forget('lang.js');
+    $strings = Cache::rememberForever('lang.js', function () use ($lang){
+
+        $files = glob(resource_path('lang-for-vue/' . $lang . '/*.php'));
+        $strings = [];
+
+        foreach ($files as $file) {
+            $name = basename($file, '.php');
+            $strings[$name] = require $file;
+        }
+        return $strings;
+    });
+
+    header('Content-Type: text/javascript');
+    echo('window.i18n = ' . json_encode($strings) . ';');
+    exit();
+});

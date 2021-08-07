@@ -3867,7 +3867,8 @@ __webpack_require__.r(__webpack_exports__);
       comments: [],
       user_id: $('body').attr('data-user-id'),
       user_name: $('body').attr('data-user-name'),
-      token: $('meta[name=csrf-token]').attr('content')
+      token: $('meta[name=csrf-token]').attr('content'),
+      title: i18n.chat.title
     };
   },
   methods: {
@@ -3953,6 +3954,8 @@ __webpack_require__.r(__webpack_exports__);
     this.getComments();
     window.Echo["private"]('chat.' + this.user_id).listen('ChatMessage', function (response) {
       _this3.comments.unshift(response);
+    }).error(function (error) {
+      console.log('ERROR IN SOCKETS CONNTECT : ' + error);
     });
   }
 });
@@ -4024,7 +4027,8 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
       Authorization: 'Bearer ' + document.querySelector('meta[name="csrf-token"]').getAttribute('content') // csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 
     }
-  }
+  },
+  enabledTransports: ['ws', 'wss']
 });
 
 /***/ }),
@@ -28121,7 +28125,15 @@ var render = function() {
         staticClass: "container-fluid chat-header",
         on: { click: _vm.hideShowChatBody }
       },
-      [_vm._m(0)]
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-10 " }, [
+            _c("p", { staticClass: "chat-header-text" }, [
+              _vm._v(_vm._s(_vm.title))
+            ])
+          ])
+        ])
+      ]
     ),
     _vm._v(" "),
     _c("div", { staticClass: "chat-body" }, [
@@ -28214,20 +28226,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-10 " }, [
-        _c("p", { staticClass: "chat-header-text" }, [
-          _vm._v("Напишите нам, мы в онлайн!! ")
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
