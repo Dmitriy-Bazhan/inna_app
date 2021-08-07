@@ -9,6 +9,8 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['category_id', 'vendor_code', 'alias', 'search_string'];
+
     protected $casts = [
         'published' => 'boolean',
     ];
