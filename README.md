@@ -16,7 +16,7 @@
  Events<br>
  Observers<br>
  DataBase Seeder<br>
- 
+ Pagination<br>
  
 Остальное:<br>
 
