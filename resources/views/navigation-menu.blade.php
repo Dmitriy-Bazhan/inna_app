@@ -130,6 +130,11 @@
                                 </x-jet-dropdown-link>
                             @endif
 
+                            @if(\Illuminate\Support\Facades\Auth::user()->role == 2)
+                                <x-jet-dropdown-link href="{{ url('vue_admin/users') }}">
+                                    {{ __('Vue Admin') }}
+                                </x-jet-dropdown-link>
+                            @endif
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">

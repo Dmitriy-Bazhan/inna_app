@@ -59,11 +59,11 @@
                             {{--                                {{ __('Profile') }}--}}
                             {{--                            </x-jet-dropdown-link>--}}
 
-                            @if(\Illuminate\Support\Facades\Auth::user()->role == 2)
-                                <x-jet-dropdown-link href="{{ route('admin.users') }}">
-                                    {{ __('Admin') }}
-                                </x-jet-dropdown-link>
-                            @endif
+{{--                            @if(\Illuminate\Support\Facades\Auth::user()->role == 2)--}}
+{{--                                <x-jet-dropdown-link href="{{ route('admin.users') }}">--}}
+{{--                                    {{ __('Admin') }}--}}
+{{--                                </x-jet-dropdown-link>--}}
+{{--                            @endif--}}
 
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

@@ -11,21 +11,10 @@ use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ParsingController;
 use App\Http\Controllers\Admin\ChatController;
+use App\Http\Controllers\VueAdmin\UsersController as VueUsersController;
 use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Support\Facades\Broadcast;
-
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::prefix(get_prefix())->group(function () {
     Route::get('/', [HomePageController::class, 'index'])->name('/');
@@ -39,6 +28,13 @@ Route::prefix(get_prefix())->group(function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+//Vue ADMIN Panel
+Route::prefix('vue_admin')->middleware(['auth:sanctum','verified', 'checkRole'])->group(function (){
+    Route::get('/users', [VueUsersController::class, 'index']);
+    Route::get('/products', [VueUsersController::class, 'index']);
+    Route::get('/posts', [VueUsersController::class, 'index']);
+});
 
 
 //ADMIN PANEL

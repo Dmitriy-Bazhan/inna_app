@@ -144,7 +144,7 @@ class DatabaseSeeder extends Seeder
         }
 
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $product = Product::create([
                 'category_id' => rand(4, 12),
                 'vendor_code' => $i . $i . $i,
