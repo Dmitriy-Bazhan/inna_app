@@ -21,6 +21,7 @@
 Остальное:<br>
 
  Vue.js<br>
+ Vue Router<br>
  Localization for Vue('ru, ua')<br>
  Ajax<br>
  Axios<br>

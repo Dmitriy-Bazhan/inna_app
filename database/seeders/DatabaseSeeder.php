@@ -6,8 +6,6 @@ use App\Models\Category;
 use App\Models\CategoryData;
 use App\Models\Post;
 use App\Models\PostData;
-use App\Models\Product;
-use App\Models\ProductData;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -143,25 +141,9 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-
-        for ($i = 0; $i < 1000; $i++) {
-            $product = Product::create([
-                'category_id' => rand(4, 12),
-                'vendor_code' => $i . $i . $i,
-                'alias' => Str::slug('Product number ' . $i, '-'),
-                'search_string' => 'продуктru' . $i . '_продуктua' . $i
-            ]);
-            $id = $product->id;
-            foreach (['ua', 'ru'] as $lang){
-                ProductData::create([
-                    'product_id' => $id,
-                    'lang' => $lang,
-                    'name' => 'Продукт на ' . $lang . ' языке',
-                    'short_description' => 'Короткое писание на '. $lang . ' языке',
-                    'description' => 'Большое и полное писание на '. $lang . ' языке'
-                ]);
-            }
-        }
+        $this->call([
+            ProductSeeder::class
+        ]);
 
 
         // \App\Models\User::factory(10)->create();

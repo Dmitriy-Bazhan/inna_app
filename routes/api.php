@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
 use \App\Http\Controllers\Admin\ChatController;
-use \App\Http\Controllers\VueAdmin\TemporaryController;
+use \App\Http\Controllers\VueAdmin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +27,6 @@ Route::post('/admin_send_message', [ChatController::class, 'broadcast']);
 Route::get('/getComments/{user_id}', [ChatController::class, 'getComments']);
 
 Route::middleware(['auth:sanctum', 'verified', 'checkRole'])
-       ->get('/getProducts', [TemporaryController::class, 'getProducts']);
+       ->resource('/products', ProductController::class);
 
 //Route::get('/getProducts', [TemporaryController::class, 'getProducts']);

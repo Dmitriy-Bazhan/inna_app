@@ -15,8 +15,8 @@ class Product extends Model
         'published' => 'boolean',
     ];
 
-    public function setPublishedAttribute($value)
+    public function data()
     {
-        $this->attributes['category_ids'] = (int)$value;
+        return $this->hasOne(ProductData::class, 'product_id', 'id');
     }
 }
