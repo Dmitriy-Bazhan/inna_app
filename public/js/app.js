@@ -4247,13 +4247,17 @@ window.onload = function () {
     });
   }
 
-  var app1 = new vue__WEBPACK_IMPORTED_MODULE_1__.default({
-    el: '#vue-admin-main',
-    render: function render(h) {
-      return h(_components_vue_admin_vue_admin_main__WEBPACK_IMPORTED_MODULE_2__.default);
-    },
-    router: _router__WEBPACK_IMPORTED_MODULE_0__.default
-  });
+  var vueAdminMain = $('#vue-admin-main').attr('data-admin-id');
+
+  if (vueAdminMain !== undefined) {
+    var app1 = new vue__WEBPACK_IMPORTED_MODULE_1__.default({
+      el: '#vue-admin-main',
+      render: function render(h) {
+        return h(_components_vue_admin_vue_admin_main__WEBPACK_IMPORTED_MODULE_2__.default);
+      },
+      router: _router__WEBPACK_IMPORTED_MODULE_0__.default
+    });
+  }
 };
 
 /***/ }),
@@ -4274,8 +4278,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // window.axios.defaults.withCredentials = true;
-
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

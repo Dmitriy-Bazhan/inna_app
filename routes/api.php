@@ -28,5 +28,3 @@ Route::get('/getComments/{user_id}', [ChatController::class, 'getComments']);
 
 Route::middleware(['auth:sanctum', 'verified', 'checkRole'])
        ->resource('/products', ProductController::class);
-
-//Route::get('/getProducts', [TemporaryController::class, 'getProducts']);

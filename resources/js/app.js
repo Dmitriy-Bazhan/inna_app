@@ -21,9 +21,12 @@ window.onload = function () {
         });
     }
 
-    const app1 = new Vue({
-        el: '#vue-admin-main',
-        render: h => h(VueAdminMain),
-        router
-    });
+    let vueAdminMain = $('#vue-admin-main').attr('data-admin-id');
+    if (vueAdminMain !== undefined) {
+        const app1 = new Vue({
+            el: '#vue-admin-main',
+            render: h => h(VueAdminMain),
+            router
+        });
+    }
 }

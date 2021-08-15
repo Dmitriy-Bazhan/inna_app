@@ -13,9 +13,7 @@ use App\Http\Controllers\Admin\ParsingController;
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\VueAdmin\UsersController as VueUsersController;
 use Illuminate\Support\Facades\Cache;
-
 use Illuminate\Support\Facades\Broadcast;
-
 
 //Socialize
 use App\Http\Controllers\LoginWithGoogleController;
@@ -24,12 +22,12 @@ Route::get('authorized/google', [LoginWithGoogleController::class, 'redirectToGo
 Route::get('authorized/google/callback', [LoginWithGoogleController::class, 'handleGoogleCallback']);
 
 
-
-
+//Site
 Route::prefix(get_prefix())->group(function () {
     Route::get('/', [HomePageController::class, 'index'])->name('/');
     Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 
+    //Ajax
     Route::post('/add_messages_to_chat', [ChatController::class, 'addMessagesToModalChat']);
 });
 
@@ -38,6 +36,7 @@ Route::prefix(get_prefix())->group(function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
 
 //Vue ADMIN Panel
 Route::prefix('vue_admin')->middleware(['auth:sanctum','verified', 'checkRole'])->group(function (){
@@ -56,15 +55,16 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'checkRole'])
         Route::resource('/category', CategoryController::class);
         Route::resource('/filters', FilterController::class);
         Route::get('/parsing', [ParsingController::class, 'index']);
+        Route::get('/chat', [ChatController::class, 'index']);
 
+        //Ajax
         Route::post('/check_has_new_message', [ChatController::class, 'checkHasNewMessage']);
         Route::post('/add_messages_to_modal_chat', [ChatController::class, 'addMessagesToModalChat']);
         Route::post('/admin_close_the_problems', [ChatController::class, 'completeChat']);
         Route::post('/add_row_to_chats_list', [ChatController::class, 'addRowToChatsList']);
-
-        Route::get('/chat', [ChatController::class, 'index']);
     });
 
+//Chat channels
 Broadcast::routes(['middleware' => ['auth:sanctum', 'verified',]]);
 
 

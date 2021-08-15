@@ -28,10 +28,8 @@
 <br>
 <br>
 
-<div id="vue-admin-main" class="row">
-
+<div id="vue-admin-main" class="row" data-admin-id="{{ Auth::user()->id }}">
     <vue-admin-main></vue-admin-main>
-
 </div>
 
 </body>
