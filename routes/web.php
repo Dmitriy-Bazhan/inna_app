@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Support\Facades\Broadcast;
 
+
+//Socialize
+use App\Http\Controllers\LoginWithGoogleController;
+
+Route::get('authorized/google', [LoginWithGoogleController::class, 'redirectToGoogle']);
+Route::get('authorized/google/callback', [LoginWithGoogleController::class, 'handleGoogleCallback']);
+
+
+
+
 Route::prefix(get_prefix())->group(function () {
     Route::get('/', [HomePageController::class, 'index'])->name('/');
     Route::get('/shop', [ShopController::class, 'index'])->name('shop');

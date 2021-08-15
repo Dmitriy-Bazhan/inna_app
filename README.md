@@ -17,6 +17,7 @@
  Observers<br>
  DataBase Seeder<br>
  Pagination<br>
+ Socialize(Google Id)<br>
  
 Остальное:<br>
 
