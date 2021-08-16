@@ -17,6 +17,6 @@ class Product extends Model
 
     public function data()
     {
-        return $this->hasOne(ProductData::class, 'product_id', 'id');
+        return $this->hasMany(ProductData::class, 'product_id', 'id');
     }
 }

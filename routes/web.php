@@ -42,6 +42,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::prefix('vue_admin')->middleware(['auth:sanctum','verified', 'checkRole'])->group(function (){
     Route::get('/users', [VueUsersController::class, 'index']);
     Route::get('/products', [VueUsersController::class, 'index']);
+    Route::get('/products/edit/{id}', [VueUsersController::class, 'index']);
     Route::get('/posts', [VueUsersController::class, 'index']);
 });
 
