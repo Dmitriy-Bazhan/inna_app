@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\VueAdmin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\ProcessProductCreate;
+use App\Mail\ProductUpdate;
 use App\Models\Product;
 use \Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Resources\ProductResource;
+use Illuminate\Support\Facades\Mail;
 
 class ProductController extends Controller
 {
@@ -83,7 +86,12 @@ class ProductController extends Controller
             $response = ['response' => 'NOT GOOD', 'success' => false, 'errors' => $errors];
         } else {
 //process the request
-            $response = ['response' => $request->all(), 'success' => true];
+            $product = Product::find($request->input('id'));
+            $response = ['response' => $product, 'success' => true];
+//            ProcessProductCreate::dispatch($product);
+
+            $email = new ProductUpdate($product);
+            Mail::to('dmitriybazhan79@gmail.com')->queue($email);
         }
         return $response;
     }

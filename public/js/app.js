@@ -3872,9 +3872,9 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.patch('/api/products/' + this.product.id, this.product).then(function (response) {
         if (response.data.success) {
-          _this.errors = []; // window.location.href = 'http://app.lock/vue_admin/products';
-
-          _this.$router.go(-1);
+          _this.errors = [];
+          console.log(response.data); // window.location.href = 'http://app.lock/vue_admin/products';
+          // this.$router.go(-1);
         } else {
           _this.errors = [];
           _this.errors = response.data.errors;

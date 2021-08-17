@@ -47,8 +47,9 @@ export default {
                 .then((response) => {
                     if (response.data.success) {
                         this.errors = [];
+                        console.log(response.data);
                         // window.location.href = 'http://app.lock/vue_admin/products';
-                        this.$router.go(-1);
+                        // this.$router.go(-1);
 
                     } else {
                         this.errors = [];

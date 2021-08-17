@@ -18,6 +18,7 @@
  DataBase Seeder<br>
  Pagination<br>
  Socialize(Google Id)<br>
+ Queue(tiny tasted)<br>
  
 Остальное:<br>
 
