@@ -28,7 +28,7 @@ class ProductResource extends JsonResource
             'image_small' => $this->image_small,
             'additional_images' => $this->additional_images,
             'published' => $this->published,
-            'data' => $this->data,
+            'data' => $this->data, //ячейка для связаной модели ProductData
         ];
     }
 }

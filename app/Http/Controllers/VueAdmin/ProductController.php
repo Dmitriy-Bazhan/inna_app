@@ -10,69 +10,42 @@ use \Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return ProductResource::collection(Product::with('data')->paginate(25));
+
+// Пример получения ProductData в Api только для одной локали
+//        return ProductResource::collection(
+//            Product::with(['data' => function($query){
+//                return $query->where('lang', app()->getLocale());
+//            }])->paginate(25)
+//        );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         return ProductResource::collection(Product::where('id', $id)->with('data')->get());
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $rules = [
@@ -85,23 +58,26 @@ class ProductController extends Controller
             $errors = $validator->errors();
             $response = ['response' => 'NOT GOOD', 'success' => false, 'errors' => $errors];
         } else {
-//process the request
-            $product = Product::find($request->input('id'));
-            $response = ['response' => $product, 'success' => true];
-//            ProcessProductCreate::dispatch($product);
+            Product::where('id', $request->input('id'))
+                ->update([
+                    'vendor_code' => $request->input('vendor_code'),
+                    'search_string' => $request->input('search_string'),
+                ]);
 
-            $email = new ProductUpdate($product);
-            Mail::to('dmitriybazhan79@gmail.com')->queue($email);
+// Очередь из emails через Jobs
+//            ProcessProductCreate::dispatch($request->input('id'));
+
+
+// Очередь из emails через фасад Mail
+//            $email = new ProductUpdate($request->input('id'));
+//            Mail::to('dmitriybazhan79@gmail.com')->queue($email);
+
+
+            $response = ['response' => $request->all(), 'success' => true];
         }
         return $response;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

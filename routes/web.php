@@ -39,11 +39,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 //Vue ADMIN Panel
+//Veu Admin работает с Api, эти роуты нужны для перезагрузки страниц в браузере
 Route::prefix('vue_admin')->middleware(['auth:sanctum','verified', 'checkRole'])->group(function (){
-    Route::get('/users', [VueUsersController::class, 'index']);
-    Route::get('/products', [VueUsersController::class, 'index']);
-    Route::get('/products/edit/{id}', [VueUsersController::class, 'index']);
-    Route::get('/posts', [VueUsersController::class, 'index']);
+    Route::view('/users', 'admin.layouts.vue-admin-layout');
+    Route::view('/products', 'admin.layouts.vue-admin-layout');
+    Route::view('/products/edit/{id}', 'admin.layouts.vue-admin-layout');
+    Route::view('/posts', 'admin.layouts.vue-admin-layout');
 });
 
 

@@ -19,16 +19,16 @@ class ProcessProductCreate implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $product;
+    protected $productId;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Product $product)
+    public function __construct($productId)
     {
-        $this->product = $product;
+        $this->productId = $productId;
     }
 
     /**
@@ -36,9 +36,10 @@ class ProcessProductCreate implements ShouldQueue
      *
      * @return void
      */
-    public function handle(Product $product)
+    public function handle()
     {
-        $email = new ProductUpdate($product);
+        $product = Product::find($this->productId);
+        $email = new ProductUpdate($product->id);
         Mail::to('dmitriybazhan79@gmail.com')->send($email);
     }
 }

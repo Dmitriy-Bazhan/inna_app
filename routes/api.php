@@ -26,5 +26,9 @@ Route::post('/admin_send_message', [ChatController::class, 'broadcast']);
 
 Route::get('/getComments/{user_id}', [ChatController::class, 'getComments']);
 
+
 Route::middleware(['auth:sanctum', 'verified', 'checkRole'])
        ->resource('/products', ProductController::class);
+
+//Для тестирования в PostMan использовать роуты без посредников
+//Route::resource('/products', ProductController::class);
