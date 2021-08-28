@@ -12,16 +12,16 @@ class ProductUpdate extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $product;
+    protected $productId;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Product $product)
+    public function __construct($productId)
     {
-        $this->product = $product;
+        $this->productId = $productId;
     }
 
     /**
@@ -32,7 +32,7 @@ class ProductUpdate extends Mailable
     public function build()
     {
         return $this->view('mail')->with([
-            'id' => $this->product->id,
+            'id' => $this->productId,
         ]);
     }
 }
