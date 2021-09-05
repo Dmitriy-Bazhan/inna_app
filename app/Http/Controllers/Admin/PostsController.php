@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Events\AddPostEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdatePost;
 use App\Models\PostData;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -115,9 +116,10 @@ class PostsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePost $request, $id)
     {
-        $request->validate($this->rules());
+
+//        $request->validate($this->rules());
 
         $post = Post::find($id);
         $post->alias = Str::slug($request->input('title.ua'), '-');
@@ -173,7 +175,7 @@ class PostsController extends Controller
     {
         return [
             'alias' => 'alpha_dash|max:255',
-            'title.*' => ['required', 'regex:/^[0-9A-Za-zА-Яа-яґҐЁёІіЇїЄє\'’ʼ.,:;-_\s\ ]+$/u'],
+            'title.*' => ['required', 'regex:/^[0-9A-Za-zА-Яа-яґҐЁёІіЇїЄє\'’ʼ.,:;-_ ]+$/u'],
             'content.*' => ['required', 'regex:/^[0-9A-Za-zА-Яа-яґҐЁёІіЇїЄє\'’ʼ.,:;-_\s\ ]+$/u'],
             'short_description.*' => ['required', 'max:400', 'regex:/^[0-9A-Za-zА-Яа-яґҐЁёІіЇїЄє\'’ʼ.,:;-_\s\ ]+$/u'],
             'imageBig' => 'image|mimes:jpeg,png,jpg,gif,svg',

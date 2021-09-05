@@ -4,7 +4,9 @@ namespace App\Http\Controllers\HomePage;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\PostData;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 class HomePageController extends Controller
 {
