@@ -28,7 +28,7 @@ class HomePageController extends Controller
             }
         } catch (\Exception $exception) {
             //Временно. Исправить когда разберусь с логами
-            dd('Redis not work');
+            dd('Redis not work: git' . $exception->getMessage());
         }
 
         //Использование памяти
